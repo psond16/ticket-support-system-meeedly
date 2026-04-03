@@ -4,6 +4,11 @@ import { useNavigate } from "react-router-dom";
 function TicketCreation({ addTicket }){
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState(""); 
+    const [attachment, setAttachment] = useState(null);
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [category, setCategory] = useState("");
     const navigate = useNavigate();
 
 
@@ -14,7 +19,12 @@ function TicketCreation({ addTicket }){
         const newTicket = {
             id: Date.now(),
             title: title,
+            category,
             description: description,
+            attachment,
+            firstName,
+            lastName,
+            email,
             status: "Open",
             priority: "Low",
             messages: [],
@@ -34,6 +44,8 @@ function TicketCreation({ addTicket }){
             <h1>Create Ticket</h1>
 
             <form onSubmit={handleSubmit}>
+
+                {/* TITLE OF TICKET*/}
                 <div>
                     <label>Title</label>
                     <input 
@@ -43,7 +55,22 @@ function TicketCreation({ addTicket }){
                         onChange={(e) => setTitle(e.target.value)}
                      />
                 </div>
-
+                
+                {/* CATEGORY OF TICKET*/}
+                <div>
+                    <select
+                        value={category}
+                        onChange={(e) => setCategory(e.target.value)}
+                        >
+                        <option value="">Select category</option>
+                        <option value="General">General</option>
+                        <option value="Technical">Technical</option>
+                        <option value="Billing">Billing</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                
+                {/* ABOUT THE TICKET*/}
                 <div>
                     <label>Description</label>
                     <textarea
@@ -53,7 +80,45 @@ function TicketCreation({ addTicket }){
                     />
                 </div>
 
-                <button type="submit" disabled={!title || !description}>Create ticket</button>
+                {/* PICTURE ABOUT THE TICKET*/}
+                <div>
+                    <input
+                        type="file"
+                        onChange={(e) => setAttachment(e.target.files[0])}
+                    />
+                </div>
+                
+                {/* FIRST NAME OF USER*/}
+                <div>
+                    <input
+                        type="text"
+                        value={firstName}
+                        placeholder="First name"
+                        onChange={(e) => setFirstName(e.target.value)}
+                    />
+                </div>
+
+                {/* LAST NAME OF USER*/}
+                <div>
+                    <input
+                        type="text"
+                        value={lastName}
+                        placeholder="Last name"
+                        onChange={(e) => setLastName(e.target.value)}
+                    />
+                </div>
+
+                {/* EMAIL OF USER*/}
+                <div>
+                    <input
+                        type="email"
+                        value={email}
+                        placeholder="Email"
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
+                </div>
+
+                <button type="submit" disabled={!title || !description || !category || !email}>Create ticket</button>
             </form>
         </div>
     );
