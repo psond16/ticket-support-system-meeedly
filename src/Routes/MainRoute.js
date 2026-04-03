@@ -3,6 +3,7 @@ import Home from "../View/Home/Home";
 import Settings from "../View/Settings/Settings";
 import About from "../View/About/About";
 import Error404 from "../View/Error404/Error404";
+import TicketCreation from "../View/TicketCreation/TicketCreation";
 
 export default function MainRoute(){
     return(
@@ -37,6 +38,16 @@ export default function MainRoute(){
                         </Routes>
                     }
                 />  
+
+                <Route
+                    path = "/create-ticket"
+                    element = {
+                        <Routes>
+                            <Route path = "/" element = {<TicketCreation />}/>
+                            <Route path = "/*" element = {<Error404 />}/>
+                        </Routes>
+                    }
+                /> 
             </Routes>
         </>
 
