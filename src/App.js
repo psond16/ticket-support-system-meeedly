@@ -1,7 +1,9 @@
 import MainRoute from "./Routes/MainRoute";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap-icons/font/bootstrap-icons.css";
-import { useState, useEffect } from "react";
+import { useState } from "react";
+
+import CommonHomeUtils from "./Scripts/CommonHomeUtils";
 
 import "./Style/Main.css";
 import "./Style/Mobile.css";
@@ -11,27 +13,26 @@ import "./Style/Tablet.css";
 
 function App() {
 
-{/* load tickets from local storege */}
   const [tickets, setTickets] = useState(() => {
-    const saved = localStorage.getItem("tickets");
-    return saved ? JSON.parse(saved) : [];
+    return CommonHomeUtils.getSavedTickets();
   });
-
-  {/* savr tickets to local storege */}
-  useEffect(() => {
-    localStorage.setItem("tickets", JSON.stringify(tickets));
-  }, [tickets]);
 
   {/* add ticket */}
   const addTicket = (ticket) => {
-    setTickets((prevTickets) => [...prevTickets, ticket]);
+    setTickets((prev) => {
+      const updated = [...prev, ticket];
+      CommonHomeUtils.saveTickets(updated);
+      return updated;
+    });
   };
 
   {/* delete ticket */}
   const deleteTicket = (id) => {
-    setTickets((prevTickets) =>
-      prevTickets.filter((ticket) => ticket.id !== id)
-    );
+    setTickets((prev) => {
+      const updated = prev.filter((t) => t.id !== id);
+      CommonHomeUtils.saveTickets(updated);
+      return updated;
+    });
   };
 
   return (
