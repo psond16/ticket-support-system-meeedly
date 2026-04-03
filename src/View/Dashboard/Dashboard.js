@@ -1,3 +1,5 @@
+import TicketCard from "../../Components/TicketCard/TicketCard";
+
 function Dashboard({ tickets }) {
     return (
         <div>
