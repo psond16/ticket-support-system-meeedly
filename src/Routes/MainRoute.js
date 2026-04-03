@@ -47,7 +47,7 @@ export default function MainRoute(){
                             <Route path = "/*" element = {<Error404 />}/>
                         </Routes>
                     }
-                /> 
+                />          
             </Routes>
         </>
 
