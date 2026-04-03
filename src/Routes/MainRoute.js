@@ -13,13 +13,11 @@ export default function MainRoute(){
                     element = {
                         <Routes>
                             <Route path = "/" element = {<Home />}/>
-                            <Route path = "/*" element = {<Error404 />}/>
+                            <Route path="/*" element={<Error404 />} />
                         </Routes>
                     }
                 />
-            </Routes>
 
-            <Routes>
                 <Route
                     path = "/about/"
                     element = {
@@ -29,19 +27,18 @@ export default function MainRoute(){
                         </Routes>
                     }
                 />
-            </Routes>
 
-            <Routes>
                 <Route
-                    path = "/settings/"
+                    path = "/settings"
                     element = {
                         <Routes>
                             <Route path = "/" element = {<Settings />}/>
                             <Route path = "/*" element = {<Error404 />}/>
                         </Routes>
                     }
-                />
+                />  
             </Routes>
         </>
+
     )
 }
