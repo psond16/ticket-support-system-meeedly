@@ -1,0 +1,18 @@
+:root{
+    --ml-general-bg-color: #f50a0a;
+    --ml-general-black-color: #16161d;
+    --ml-general-white-color: #ffffff;
+
+}
+
+:after,
+:before{
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+}
+
+body{
+    padding: 0;
+    margin: 0;
+}
