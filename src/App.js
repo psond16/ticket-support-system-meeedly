@@ -16,9 +16,15 @@ function App() {
     setTickets((prevTickets) => [...prevTickets, ticket]);
   };
 
+  const deleteTicket = (id) => {
+    setTickets((prevTickets) =>
+      prevTickets.filter((ticket) => ticket.id !== id)
+    );
+  };
+
   return (
     <>
-      <MainRoute tickets={tickets} addTicket={addTicket}/>
+      <MainRoute tickets={tickets} addTicket={addTicket} deleteTicket={deleteTicket}/>
     </>
   );
 };
