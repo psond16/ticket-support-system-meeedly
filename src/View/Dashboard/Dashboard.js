@@ -7,11 +7,22 @@ function Dashboard({ tickets }) {
     return (
         
         <div>
+
+            <h1>Dashboard</h1>
+
+            {/* create new ticket */}
             <button onClick={() => navigate("/create-ticket")}>
                 Create New Ticket
             </button>
-            
-            <h1>Dashboard</h1>
+
+            {/* show ticket / empty state */}
+            {tickets.length === 0 ? (
+                <p>No tickets yet</p>
+            ) : (
+                tickets.map((ticket) => (
+                    <TicketCard key={ticket.id} ticket={ticket} />
+                ))
+            )}
         </div>
     );
 }
