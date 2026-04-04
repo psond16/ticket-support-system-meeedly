@@ -8,7 +8,7 @@ import {
 
 import "../../Style/Components/TicketCard/TicketCard.css";
 
-function TicketCard({ ticket }) {
+function TicketCard({ ticket, assignToMe }) {
 
     const navigate = useNavigate();
 
@@ -37,7 +37,15 @@ function TicketCard({ ticket }) {
                         <div className={`status-badge ${ticket.status.toLowerCase().replace(" ", "-")}`}>
                             {ticket.status}
                         </div>
-                        <span>{ticket.assignedTo || "Unassigned"}</span>
+                        {!ticket.assignedTo ? (
+                            <button onClick={() => assignToMe(ticket.id)}>
+                                Assign to me
+                            </button>
+                        ) : (
+                            <p>
+                                Assigned to: {ticket.assignedTo}
+                            </p>
+                        )}
                         <span>
                             {DateFormats.timeAgoFormat(ticket.createdAt)}
                         </span>

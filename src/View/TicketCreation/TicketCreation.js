@@ -20,7 +20,6 @@ function TicketCreation({ addTicket }){
             id: Date.now(),
             title: title,
             category,
-            description: description,
             attachment,
             firstName,
             lastName,
@@ -34,7 +33,8 @@ function TicketCreation({ addTicket }){
                     sender: "user"
                 }
             ],
-            createdAt: new Date().toISOString()
+            createdAt: new Date().toISOString(),
+            assignedTo: null
         };
 
         addTicket(newTicket);

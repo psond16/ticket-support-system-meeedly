@@ -5,7 +5,7 @@ import { GeneralSearch } from "noplin-uis";
 import TicketCard from "../../Components/TicketCard/TicketCard";
 import "../../Style//Dashboard/Dashboard.css";
 
-function Dashboard({ tickets, deleteTicket }) {
+function Dashboard({ tickets, deleteTicket, assignToMe }) {
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState("");//search state to filter queries
 
@@ -119,6 +119,7 @@ function Dashboard({ tickets, deleteTicket }) {
                                 key={ticket.id}
                                 ticket={ticket}
                                 deleteTicket={deleteTicket}
+                                assignToMe={assignToMe}
                             />
                         ))
                     )}

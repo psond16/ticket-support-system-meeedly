@@ -8,6 +8,19 @@ import Dashboard from "../View/Dashboard/Dashboard";
 import TicketDetails from "../View/TicketDetails/TicketDetails";
 
 export default function MainRoute({ tickets, addTicket, deleteTicket, setTickets }){
+
+    const assignToMe = (ticketId) => {
+        const currentUser = "Agent A";
+    
+        setTickets((prev) =>
+            prev.map((t) =>
+                t.id === ticketId
+                    ? { ...t, assignedTo: currentUser }
+                    : t
+            )
+        );
+    };
+    
     return(
         <>
             <Routes>
@@ -55,7 +68,7 @@ export default function MainRoute({ tickets, addTicket, deleteTicket, setTickets
                     path = "/dashboard"
                     element = {
                         <Routes>
-                            <Route path = "/" element = {<Dashboard tickets={tickets} deleteTicket={deleteTicket} />}/>
+                            <Route path = "/" element = {<Dashboard tickets={tickets} deleteTicket={deleteTicket} assignToMe={assignToMe} />}/>
                             <Route path = "/*" element = {<Error404 />}/>
                         </Routes>
                     }
@@ -65,7 +78,7 @@ export default function MainRoute({ tickets, addTicket, deleteTicket, setTickets
                     path = "/ticket/:id"
                     element = {
                         <Routes>
-                            <Route path = "/" element={<TicketDetails tickets={tickets} setTickets={setTickets} />} />
+                            <Route path = "/" element={<TicketDetails tickets={tickets} setTickets={setTickets} assignToMe={assignToMe}/>} />
                             <Route path = "/*" element = {<Error404 />}/>
                         </Routes>
                     }

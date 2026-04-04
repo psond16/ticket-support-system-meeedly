@@ -35,9 +35,25 @@ function App() {
     });
   };
 
+  const assignToMe = (id) => {
+    setTickets((prev) => {
+      const updated = prev.map((t) =>
+        t.id === id
+          ? {
+              ...t,
+              assignedTo: "me"
+            }
+          : t
+      );
+  
+      CommonHomeUtils.saveTickets(updated);
+      return updated;
+    });
+  };
+
   return (
     <>
-      <MainRoute tickets={tickets} addTicket={addTicket} deleteTicket={deleteTicket} setTickets={setTickets}/>
+      <MainRoute tickets={tickets} addTicket={addTicket} deleteTicket={deleteTicket} setTickets={setTickets} assignToMe={assignToMe}/>
     </>
   );
 };
