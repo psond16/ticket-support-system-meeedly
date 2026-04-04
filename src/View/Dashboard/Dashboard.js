@@ -22,6 +22,7 @@ function Dashboard({ tickets, deleteTicket }) {
         const title = (ticket?.title || "").toString().toLowerCase();
         const description = (ticket?.description || "").toString().toLowerCase();
         const status = (ticket?.status || "").toString().toLowerCase();
+        const category = (ticket?.category || "").toString().toLowerCase();
         const priority = (ticket?.priority || "").toString().toLowerCase();
         const assignedTo = (ticket?.assignedTo || "").toString().toLowerCase();
     
@@ -29,6 +30,7 @@ function Dashboard({ tickets, deleteTicket }) {
             title.includes(query) ||
             description.includes(query) ||
             status.includes(query) ||
+            category.includes(query) ||
             priority.includes(query) ||
             assignedTo.includes(query);
     
