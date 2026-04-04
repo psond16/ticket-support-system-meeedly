@@ -1,3 +1,5 @@
+import DateFormats from "../../Utilities/DateFormat";
+
 import {
     NoplinCardGeneral,
     NoplinCardBodyArea
@@ -32,7 +34,9 @@ function TicketCard({ ticket }) {
                             {ticket.status}
                         </div>
                         <span>{ticket.assignedTo || "Unassigned"}</span>
-                        <span>{ticket.createdAt}</span>
+                        <span>
+                            {DateFormats.timeAgoFormat(ticket.createdAt)}
+                        </span>
         
                     </div>
 
