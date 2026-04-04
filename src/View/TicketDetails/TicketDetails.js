@@ -1,6 +1,14 @@
+import { useParams } from "react-router-dom";
 
+function TicketDetail({ tickets }) {
 
-function TicketDetail({ tickets, setTickets }) {
+    const { id } = useParams();
+
+    const ticket = tickets.find((t) => t.id === Number(id));
+
+    if (!ticket) {
+        return <h2>Ticket not found</h2>;
+    }
 
     return (
         <div>
@@ -10,26 +18,11 @@ function TicketDetail({ tickets, setTickets }) {
             <p>Priority: {ticket.priority}</p>
             <p>Category: {ticket.category}</p>
 
-            {/* Messages */}
-            <div>
-                {ticket.messages.length === 0 ? (
-                    <p>No messages yet</p>
-                ) : (
-                    ticket.messages.map((msg, index) => (
-                        <div key={index}>
-                            <strong>{msg.sender}:</strong> {msg.content}
-                        </div>
-                    ))
-                )}
-            </div>
-
-            {/* Input */}
+            {/* Messages (future) */}
             <div>
                 <input
                     type="text"
-                    value={message}
                     placeholder="Type a message..."
-                    onChange={(e) => setMessage(e.target.value)}
                 />
 
                 <button>Send</button>

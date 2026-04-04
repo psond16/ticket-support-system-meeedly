@@ -1,4 +1,5 @@
 import DateFormats from "../../Utilities/DateFormat";
+import { useNavigate } from "react-router-dom";
 
 import {
     NoplinCardGeneral,
@@ -8,8 +9,11 @@ import {
 import "../../Style/Components/TicketCard/TicketCard.css";
 
 function TicketCard({ ticket }) {
+
+    const navigate = useNavigate();
+
     return (
-        <NoplinCardGeneral className="ticket-row">
+        <NoplinCardGeneral className="ticket-row" onClick={() => navigate(`/ticket/${ticket.id}`)}>
 
             <NoplinCardBodyArea className="ticket-body">
                 <div className="ticket-content">

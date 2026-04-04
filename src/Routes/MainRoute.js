@@ -5,6 +5,7 @@ import About from "../View/About/About";
 import Error404 from "../View/Error404/Error404";
 import TicketCreation from "../View/TicketCreation/TicketCreation";
 import Dashboard from "../View/Dashboard/Dashboard";
+import TicketDetails from "../View/TicketDetails/TicketDetails";
 
 export default function MainRoute({ tickets, addTicket, deleteTicket }){
     return(
@@ -55,6 +56,16 @@ export default function MainRoute({ tickets, addTicket, deleteTicket }){
                     element = {
                         <Routes>
                             <Route path = "/" element = {<Dashboard tickets={tickets} deleteTicket={deleteTicket} />}/>
+                            <Route path = "/*" element = {<Error404 />}/>
+                        </Routes>
+                    }
+                /> 
+
+                <Route
+                    path = "/ticket/:id"
+                    element = {
+                        <Routes>
+                            <Route path = "/" element={<TicketDetails tickets={tickets} />} />
                             <Route path = "/*" element = {<Error404 />}/>
                         </Routes>
                     }
