@@ -38,9 +38,14 @@ function TicketCard({ ticket, assignToMe }) {
                             {ticket.status}
                         </div>
                         {!ticket.assignedTo ? (
-                            <button onClick={() => assignToMe(ticket.id)}>
-                                Assign to me
-                            </button>
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    assignToMe(ticket.id);
+                                }}
+                            >
+                            Assign to me
+                        </button>
                         ) : (
                             <p>
                                 Assigned to: {ticket.assignedTo}
