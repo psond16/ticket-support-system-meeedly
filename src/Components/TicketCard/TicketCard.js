@@ -19,8 +19,10 @@ function TicketCard({ ticket }) {
                         </div>
 
                         <div className="ticket-meta">
-                            <span>{ticket.category}</span>
-                            <span>{ticket.priority}</span>
+                            <span className = "category-badge">{ticket.category}</span>
+                            <span className={`priority-badge ${ticket.priority?.toLowerCase()}`}>
+                                {ticket.priority}
+                            </span>
                         </div>
                     </div>
 
@@ -29,8 +31,9 @@ function TicketCard({ ticket }) {
                         <div className={`status-badge ${ticket.status.toLowerCase().replace(" ", "-")}`}>
                             {ticket.status}
                         </div>
-                        <span>{ticket.createdAt}</span>
                         <span>{ticket.assignedTo || "Unassigned"}</span>
+                        <span>{ticket.createdAt}</span>
+        
                     </div>
 
                 </div>
