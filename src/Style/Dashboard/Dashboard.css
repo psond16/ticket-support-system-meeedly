@@ -1,3 +1,31 @@
 .dashboard-container {
     padding: 0 40px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+.search-wrapper {
+    width: 100%;
+    padding: 0 40px;
+    box-sizing: border-box;
+}
+
+.__npl-hsbr-p-ps input {
+    flex: 1;
+    height: 100%;
+    min-width: 0;
+    border: 1px solid #d0d5dd;
+    border-radius: 8px;;
+    outline: none;
+}
+
+
+.__npl-hsbr-p-ps {
+    display: flex !important;
+    align-items: center;
+    width: 100%;
+    height: 40px;
+    padding: 0 12px;
+    box-sizing: border-box;
 }

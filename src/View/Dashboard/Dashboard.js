@@ -26,29 +26,31 @@ function Dashboard({ tickets, deleteTicket }) {
 
     return (
         <>
+            <div className = "search-wrapper">
             {/* search bar using NOPLIN UI component */}
-            <GeneralSearch
-                className="dashboard-search"
-                placeholder="Search tickets..."
-                icon={{
-                    className: "search-icon",
-                    icon: null,
-                }}
-                close={{
-                    className: "search-close",
-                    icon: null,
-                }}
-                input={{
-                    className: "search-input",
-                }}
-                value={searchQuery}
-                onTyping={(value) => {
-                    setSearchQuery(value);
-                }}
-                onComplete={(value) => {
-                    setSearchQuery(value);
-                }}
-            />
+                <GeneralSearch
+                    className="dashboard-search"
+                    placeholder="Search tickets..."
+                    icon={{
+                        className: "search-icon",
+                        icon: null,
+                    }}
+                    close={{
+                        className: "search-close",
+                        icon: null,
+                    }}
+                    input={{
+                        className: "search-input",
+                    }}
+                    value={searchQuery}
+                    onTyping={(value) => {
+                        setSearchQuery(value);
+                    }}
+                    onComplete={(value) => {
+                        setSearchQuery(value);
+                    }}
+                />
+            </div>
         
             <div>
 
