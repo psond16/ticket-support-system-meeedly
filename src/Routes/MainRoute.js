@@ -6,19 +6,24 @@ import Error404 from "../View/Error404/Error404";
 import TicketCreation from "../View/TicketCreation/TicketCreation";
 import Dashboard from "../View/Dashboard/Dashboard";
 import TicketDetails from "../View/TicketDetails/TicketDetails";
+import CommonHomeUtils from "../Scripts/CommonHomeUtils";
 
 export default function MainRoute({ tickets, addTicket, deleteTicket, setTickets }){
 
     const assignToMe = (ticketId) => {
         const currentUser = "Agent A";
     
-        setTickets((prev) =>
-            prev.map((t) =>
+        setTickets((prev) => {
+            const updated = prev.map((t) =>
                 t.id === ticketId
                     ? { ...t, assignedTo: currentUser }
                     : t
             )
-        );
+            CommonHomeUtils.saveTickets(updated);
+
+            return updated;
+        });
+
     };
     
     return(
