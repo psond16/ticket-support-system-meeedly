@@ -7,42 +7,30 @@ import "../../Style/Components/TicketCard/TicketCard.css";
 
 function TicketCard({ ticket }) {
     return (
-        <NoplinCardGeneral className="ticket-card">
+        <NoplinCardGeneral className="ticket-row">
 
-            <NoplinCardBodyArea>
-                <div style={{
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                    width: "100%"
-                }}>
+            <NoplinCardBodyArea className="ticket-body">
+                <div className="ticket-content">
 
                     {/* LEFT */}
                     <div className="ticket-left">
-                       
-
-                        <div>
+                        <div className="ticket-title">
                             <h4>{ticket.title}</h4>
-                            <p>{ticket.description}</p>
+                        </div>
+
+                        <div className="ticket-meta">
+                            <span>{ticket.category}</span>
+                            <span>{ticket.priority}</span>
                         </div>
                     </div>
 
-                    {/* MIDDLE */}
-                    <div className="ticket-middle">
-                        <p>{ticket.category}</p>
-                        <p>{ticket.priority}</p>
-                        <p>{ticket.status}</p>
-                    </div>
-
                     {/* RIGHT */}
-                    <div className="ticket-actions">
-                        <button onClick={() => console.log("delete", ticket.id)}>
-                            Delete
-                        </button>
-
-                        <button onClick={() => console.log("toggle status", ticket.id)}>
-                            Toggle
-                        </button>
+                    <div className="ticket-right">
+                        <div className={`status-badge ${ticket.status.toLowerCase().replace(" ", "-")}`}>
+                            {ticket.status}
+                        </div>
+                        <span>{ticket.createdAt}</span>
+                        <span>{ticket.assignedTo || "Unassigned"}</span>
                     </div>
 
                 </div>

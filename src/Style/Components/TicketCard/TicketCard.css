@@ -1,24 +1,42 @@
-.ticket-card {
-    background-color: #f8f9fa;
-    margin-bottom: 12px;
-    border-radius: 10px;
-    transition: 0.2s ease;
+.ticket-body {
+    width: 100% !important;
 }
 
-.ticket-card:hover {
-    background-color: #eef2f7;
+.ticket-content {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    align-items: center;
+    width: 100%;
+    gap: 24px;
+}
+
+
+
+.ticket-row {
+    background-color: #ffffff;
+    margin-bottom: 12px;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+    border: 1px solid #e5e7eb;
+}
+
+.ticket-row:hover {
+    background-color: #f9fafb;
+    border-color: #d1d5db;
 }
 
 .ticket-left {
     display: flex;
-    align-items: center;
-    gap: 12px;
+    flex-direction: column;
+    gap: 4px;
+    flex: 1;
 }
 
 .ticket-left h4 {
-    margin: 0;
-    font-size: 14px;
+    font-size: 15px;
     font-weight: 600;
+    color: #111827;
+
 }
 
 .ticket-left p {
@@ -27,16 +45,75 @@
     color: #666;
 }
 
-.ticket-middle {
-    display: flex;
-    flex-direction: column;
-    font-size: 12px;
-    color: #444;
-    gap: 2px;
-}
 
 .ticket-actions button {
     font-size: 12px;
     padding: 4px 8px;
     cursor: pointer;
+}
+
+.ticket-title h4 {
+    margin: 0;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.ticket-meta {
+    display: flex;
+    gap: 10px;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.ticket-meta span {
+    background-color: #f3f4f6;
+    padding: 2px 6px;
+    border-radius: 6px;
+}
+
+.ticket-right {
+    display: flex;
+    gap: 15px;
+    font-size: 12px;
+    color: #444;
+    align-items: center;
+    margin-left: auto;
+
+}
+
+.status-badge {
+    padding: 5px 12px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-badge.open {
+    background-color: #fef9c3;
+    color: #854d0e;
+}
+
+.status-badge.in-progress {
+    background-color: #e0f2fe;
+    color: #075985;
+}
+
+.status-badge.resolved {
+    background-color: #dcfce7;
+    color: #166534;
+}
+
+.status-badge.closed {
+    background-color: #f3f4f6;
+    color: #374151;
+}
+
+.ticket-row [class*="body"] {
+    width: 100% !important;
+    display: block;
+}
+
+{/* fix for the text not cramping onn the left of the ticket container*/}
+.ticket-row > div { 
+    width: 100%;
 }
