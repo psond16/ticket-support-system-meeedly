@@ -27,7 +27,13 @@ function TicketCreation({ addTicket }){
             email,
             status: "Open",
             priority: "Low",
-            messages: [],
+            messages: [
+                {
+                    text: description,
+                    time: new Date().toISOString(),
+                    sender: "user"
+                }
+            ],
             createdAt: new Date().toISOString()
         };
 
