@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
+import CommonHomeUtils from "../../Scripts/CommonHomeUtils";
 
 function TicketDetail({ tickets, setTickets}) {
 
@@ -16,8 +17,8 @@ function TicketDetail({ tickets, setTickets}) {
 
         if (!message.trim()) return;
 
-        setTickets((prevTickets) =>
-            prevTickets.map((t) =>
+        setTickets((prevTickets) =>{
+            const updated = prevTickets.map((t) =>
                 t.id === Number(id)
                     ? {
                         ...t,
@@ -32,7 +33,10 @@ function TicketDetail({ tickets, setTickets}) {
                     }
                     : t
             )
-        );
+            CommonHomeUtils.saveTickets(updated);
+
+            return updated;
+            });
 
         setMessage("");
     };
