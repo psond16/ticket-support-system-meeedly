@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 
-function TicketDetail({ tickets }) {
+function TicketDetail({ tickets, setTickets}) {
 
     const { id } = useParams();
     const [message, setMessage] = useState("");
@@ -12,15 +12,27 @@ function TicketDetail({ tickets }) {
         return <h2>Ticket not found</h2>;
     }
 
-    const handleSend = () => {
+    const handleSend = () => {//handle reply by making a new copy instead of changing state
 
         if (!message.trim()) return;
 
-        ticket.messages.push({//new reply
-            text: message,
-            time: new Date().toISOString(),
-            sender: "support"
-        });
+        setTickets((prevTickets) =>
+            prevTickets.map((t) =>
+                t.id === Number(id)
+                    ? {
+                        ...t,
+                        messages: [
+                            ...t.messages,
+                            {
+                                text: message,
+                                time: new Date().toISOString(),
+                                sender: "support"
+                            }
+                        ]
+                    }
+                    : t
+            )
+        );
 
         setMessage("");
     };
@@ -61,6 +73,11 @@ function TicketDetail({ tickets }) {
                     value={message}
                     placeholder="Type a response..."
                     onChange={(e) => setMessage(e.target.value)}
+                    onKeyDown={(e) => {
+                        if (e.key === "Enter" && message.trim()) {
+                            handleSend();
+                        }
+                    }}
                 />
 
                 <button onClick={handleSend}>

@@ -37,7 +37,7 @@ function App() {
 
   return (
     <>
-      <MainRoute tickets={tickets} addTicket={addTicket} deleteTicket={deleteTicket}/>
+      <MainRoute tickets={tickets} addTicket={addTicket} deleteTicket={deleteTicket} setTickets={setTickets}/>
     </>
   );
 };
