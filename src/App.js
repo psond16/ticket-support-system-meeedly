@@ -20,7 +20,7 @@ function App() {
   {/* add ticket */}
   const addTicket = (ticket) => {
     setTickets((prev) => {
-      const updated = [...prev, ticket];
+      const updated = [ ticket, ...prev];
       CommonHomeUtils.saveTickets(updated);
       return updated;
     });
