@@ -53,12 +53,31 @@ function TicketDetail({ tickets, setTickets}) {
                 {ticket.messages.length === 0 ? (
                     <p>No messages yet</p>
                 ) : (
-                    ticket.messages.map((msg, index) => (//convo history
-                        <div key={index}>
-                            <p>
-                                <strong>{msg.sender}:</strong> {msg.text}
-                            </p>
-                            <small>{new Date(msg.time).toLocaleString()}</small>
+                    ticket.messages.map((msg, index) => (//to separate user and agent reply 
+                        <div
+                            key={index}
+                            style={{
+                                textAlign: msg.sender === "user" ? "left" : "right",
+                                margin: "10px 0"
+                            }}
+                        >
+                            <div
+                                style={{
+                                    display: "inline-block",
+                                    padding: "8px 12px",
+                                    borderRadius: "10px",
+                                    backgroundColor:
+                                        msg.sender === "user" ? "#e5e5e5" : "#cce5ff"
+                                }}
+                            >
+                                <p style={{ margin: 0 }}>
+                                    <strong>{msg.sender}:</strong> {msg.text}
+                                </p>
+                            </div>
+                    
+                            <small>
+                                {new Date(msg.time).toLocaleString()}
+                            </small>
                         </div>
                     ))
                 )}
