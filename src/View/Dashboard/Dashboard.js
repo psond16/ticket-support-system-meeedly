@@ -9,19 +9,39 @@ function Dashboard({ tickets, deleteTicket }) {
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState("");//search state to filter queries
 
+    //filter states
+    const [statusFilter, setStatusFilter] = useState("");
+    const [priorityFilter, setPriorityFilter] = useState("");
+    const [categoryFilter, setCategoryFilter] = useState("");
+
 
     //filter tickets based on search input:
-    const filteredTickets = (tickets || []).filter((ticket) => {
+    const filteredTickets = tickets.filter((ticket) => {
         const query = (searchQuery || "").toLowerCase();
     
-        return (
-            (ticket.title || "").toLowerCase().includes(query) ||
-            (ticket.description || "").toLowerCase().includes(query) ||
-            (ticket.status || "").toLowerCase().includes(query) ||
-            (ticket.category || "").toLowerCase().includes(query) ||
-            (ticket.priority || "").toLowerCase().includes(query) ||
-            (ticket.assignedTo || "").toLowerCase().includes(query)
-        );
+        const title = (ticket?.title || "").toString().toLowerCase();
+        const description = (ticket?.description || "").toString().toLowerCase();
+        const status = (ticket?.status || "").toString().toLowerCase();
+        const priority = (ticket?.priority || "").toString().toLowerCase();
+        const assignedTo = (ticket?.assignedTo || "").toString().toLowerCase();
+    
+        const matchesSearch =
+            title.includes(query) ||
+            description.includes(query) ||
+            status.includes(query) ||
+            priority.includes(query) ||
+            assignedTo.includes(query);
+    
+        const matchesStatus =
+            !statusFilter || (ticket?.status || "") === statusFilter;
+    
+        const matchesPriority =
+            !priorityFilter || (ticket?.priority || "") === priorityFilter;
+    
+        const matchesCategory =
+            !categoryFilter || (ticket?.category || "") === categoryFilter;
+    
+        return matchesSearch && matchesStatus && matchesPriority && matchesCategory;
     });
 
     return (
@@ -51,6 +71,32 @@ function Dashboard({ tickets, deleteTicket }) {
                     }}
                 />
             </div>
+
+            <div className="filters-row">
+
+            <select onChange={(e) => setStatusFilter(e.target.value)}>
+                <option value="">All Status</option>
+                <option value="Open">Open</option>
+                <option value="In Progress">In Progress</option>
+                <option value="Closed">Closed</option>
+            </select>
+
+            <select onChange={(e) => setPriorityFilter(e.target.value)}>
+                <option value="">All Priority</option>
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+
+            <select onChange={(e) => setCategoryFilter(e.target.value)}>
+                <option value="">All Category</option>
+                <option value="General">General</option>
+                <option value="Technical">Technical</option>
+                <option value="Billing">Billing</option>
+                <option value="Other">Other</option>
+            </select>
+
+</div>
         
             <div>
 

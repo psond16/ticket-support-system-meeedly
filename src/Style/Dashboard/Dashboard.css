@@ -29,3 +29,21 @@
     padding: 0 12px;
     box-sizing: border-box;
 }
+
+
+.filters-row {
+    display: flex;
+    gap: 12px;
+    padding: 12px 40px;
+    box-sizing: border-box;
+    width: 100%;
+}
+
+.filters-row select {
+    height: 36px;
+    padding: 6px 10px;
+    border: 1px solid #d0d5dd;
+    border-radius: 6px;
+    background-color: white;
+    flex: 1;
+}
