@@ -69,13 +69,12 @@ function TicketCard({ ticket, assignToMe }) {
                             ))}
                         </select>
 
-                                {ticket.assignedTo && (
-                                    <p>
-                                        Assigned to: <strong>{ticket.assignedTo}</strong>
-                                    </p>
-                                )}
+                            {ticket.assignedTo && (
+                                <p>
+                                    Assigned to: <strong>{ticket.assignedTo}</strong>
+                                </p>
+                            )}
 
-                            )
                         <span>
                             {DateFormats.timeAgoFormat(ticket.createdAt)}
                         </span>
