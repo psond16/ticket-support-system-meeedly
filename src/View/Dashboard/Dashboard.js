@@ -6,6 +6,8 @@ import TicketCard from "../../Components/TicketCard/TicketCard";
 import "../../Style//Dashboard/Dashboard.css";
 
 function Dashboard({ tickets, deleteTicket, assignToMe }) {
+    const [visibleCount, setVisibleCount] = useState(5);
+
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState("");//search state to filter queries
 
@@ -114,7 +116,7 @@ function Dashboard({ tickets, deleteTicket, assignToMe }) {
                     ) : filteredTickets.length === 0 ? (
                         <p>No matching tickets found</p>
                     ) : (
-                        filteredTickets.map((ticket) => (
+                        filteredTickets.slice(0, visibleCount).map((ticket) => (
                             <TicketCard
                                 key={ticket.id}
                                 ticket={ticket}
@@ -124,6 +126,16 @@ function Dashboard({ tickets, deleteTicket, assignToMe }) {
                         ))
                     )}
                 </div>
+
+                <div style={{ textAlign: "center", marginTop: "20px" }}>
+
+                    {visibleCount < filteredTickets.length && (
+                        <button onClick={() => setVisibleCount((prev) => prev + 5)}>
+                            Load More ({filteredTickets.length - visibleCount} remaining)
+                        </button>
+                    )}
+                </div>
+
             </div>
         </>
     );
