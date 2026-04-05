@@ -4,10 +4,12 @@ import { GeneralSearch } from "noplin-uis";
 
 import TicketCard from "../../Components/TicketCard/TicketCard";
 import "../../Style//Dashboard/Dashboard.css";
+import CommonHomeUtils from "../../Scripts/CommonHomeUtils";
 
-function Dashboard({ tickets, deleteTicket, assignToMe }) {
+function Dashboard({ tickets, deleteTicket, assignToMe, setTickets }) {
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState("");//search state to filter queries
+    const agents = ["Agent A", "Agent B", "Agent C"];
 
     //filter states
     const [statusFilter, setStatusFilter] = useState("");
@@ -45,6 +47,19 @@ function Dashboard({ tickets, deleteTicket, assignToMe }) {
     
         return matchesSearch && matchesStatus && matchesPriority && matchesCategory;
     });
+
+    const assignTicket = (ticketId, agentName) => {//assign by manager
+        setTickets((prev) => {
+            const updated = prev.map((t) =>
+                t.id === ticketId
+                    ? { ...t, assignedTo: agentName, status: "In Progress" }
+                    : t
+            );
+    
+            CommonHomeUtils.saveTickets(updated);
+            return updated;
+        });
+    };
 
     return (
         <>
@@ -120,6 +135,8 @@ function Dashboard({ tickets, deleteTicket, assignToMe }) {
                                 ticket={ticket}
                                 deleteTicket={deleteTicket}
                                 assignToMe={assignToMe}
+                                assignTicket={assignTicket}
+                                agents={agents}
                             />
                         ))
                     )}

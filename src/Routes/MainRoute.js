@@ -16,7 +16,7 @@ export default function MainRoute({ tickets, addTicket, deleteTicket, setTickets
         setTickets((prev) => {
             const updated = prev.map((t) =>
                 t.id === ticketId
-                    ? { ...t, assignedTo: currentUser }
+                    ? { ...t, assignedTo: currentUser, status: "In Progress"}
                     : t
             )
             CommonHomeUtils.saveTickets(updated);
@@ -73,7 +73,7 @@ export default function MainRoute({ tickets, addTicket, deleteTicket, setTickets
                     path = "/dashboard"
                     element = {
                         <Routes>
-                            <Route path = "/" element = {<Dashboard tickets={tickets} deleteTicket={deleteTicket} assignToMe={assignToMe} />}/>
+                            <Route path = "/" element = {<Dashboard tickets={tickets} deleteTicket={deleteTicket} assignToMe={assignToMe} setTickets={setTickets}/>}/>
                             <Route path = "/*" element = {<Error404 />}/>
                         </Routes>
                     }

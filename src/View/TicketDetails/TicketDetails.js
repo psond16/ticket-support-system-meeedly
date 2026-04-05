@@ -29,7 +29,8 @@ function TicketDetail({ tickets, setTickets}) {
                                 time: new Date().toISOString(),
                                 sender: "support"
                             }
-                        ]
+                        ],
+                        status: t.status === "Open" ? "In Progress" : t.status
                     }
                     : t
             )
@@ -114,7 +115,12 @@ function TicketDetail({ tickets, setTickets}) {
                 <input
                     type="text"
                     value={message}
-                    placeholder="Type a response..."
+                    disabled={ticket.status === "Closed"}
+                        placeholder={
+                            ticket.status === "Closed"
+                                ? "Ticket is closed"
+                                : "Type a response..."
+                        }
                     onChange={(e) => setMessage(e.target.value)}
                     onKeyDown={(e) => {
                         if (e.key === "Enter" && message.trim()) {
@@ -125,6 +131,23 @@ function TicketDetail({ tickets, setTickets}) {
 
                 <button onClick={handleSend}>
                     Send
+                </button>
+
+                <button
+                    onClick={() => {
+                        setTickets((prev) => {
+                            const updated = prev.map((t) =>
+                                t.id === Number(id)
+                                    ? { ...t, status: "Closed" }
+                                    : t
+                            );
+
+                            CommonHomeUtils.saveTickets(updated);
+                            return updated;
+                        });
+                    }}
+                >
+                    Close Ticket
                 </button>
             </div>
         </div>
