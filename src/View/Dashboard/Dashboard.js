@@ -131,7 +131,7 @@ function Dashboard({ tickets, deleteTicket, assignToMe }) {
 
                     {visibleCount < filteredTickets.length && (
                         <button onClick={() => setVisibleCount((prev) => prev + 5)}>
-                            Load More ({filteredTickets.length - visibleCount} remaining)
+                            Load More
                         </button>
                     )}
                 </div>
