@@ -8,7 +8,7 @@ import {
 
 import "../../Style/Components/TicketCard/TicketCard.css";
 
-function TicketCard({ ticket, assignToMe, assignTicket, agents, currentUser }) {
+function TicketCard({ ticket, assignToMe }) {
 
     const navigate = useNavigate();
 
@@ -37,35 +37,19 @@ function TicketCard({ ticket, assignToMe, assignTicket, agents, currentUser }) {
                         <div className={`status-badge ${ticket.status.toLowerCase().replace(" ", "-")}`}>
                             {ticket.status}
                         </div>
-                        {!ticket.assignedTo?.trim() ? (
-                            <>
-                                {currentUser.role === "agent" && (<button
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        assignToMe(ticket.id);
-                                    }}
-                                >
-                                    Assign to me
-                                </button>
-                                )}
-
-                                {currentUser.role === "manager" && (
-                                    <select
-                                        onClick={(e) => e.stopPropagation()}
-                                        onChange={(e) => assignTicket(ticket.id, e.target.value)}
-                                        defaultValue=""
-                                    >
-                                        <option value="" disabled>Assign to...</option>
-                                        {agents.map((agent) => (
-                                            <option key={agent} value={agent.id}>
-                                                {agent.name}
-                                            </option>
-                                        ))}
-                                    </select>
-                                )}
-                            </>
+                        {!ticket.assignedTo ? (
+                            <button
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    assignToMe(ticket.id);
+                                }}
+                            >
+                            Assign to me
+                        </button>
                         ) : (
-                            <p>Assigned to: {agents.find(a => a.id === ticket.assignedTo)?.name || "Unassigned"}</p>
+                            <p>
+                                Assigned to: {ticket.assignedTo}
+                            </p>
                         )}
                         <span>
                             {DateFormats.timeAgoFormat(ticket.createdAt)}

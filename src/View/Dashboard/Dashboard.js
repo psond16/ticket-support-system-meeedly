@@ -4,9 +4,8 @@ import { GeneralSearch } from "noplin-uis";
 
 import TicketCard from "../../Components/TicketCard/TicketCard";
 import "../../Style//Dashboard/Dashboard.css";
-import CommonHomeUtils from "../../Scripts/CommonHomeUtils";
 
-function Dashboard({ tickets, deleteTicket, assignToMe, setTickets, currentUser, agents, selectedAgentId }) {
+function Dashboard({ tickets, deleteTicket, assignToMe }) {
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState("");//search state to filter queries
 
@@ -16,23 +15,8 @@ function Dashboard({ tickets, deleteTicket, assignToMe, setTickets, currentUser,
     const [categoryFilter, setCategoryFilter] = useState("");
 
 
-    const roleFilteredTickets = tickets.filter((ticket) => {
-        if (currentUser.role === "manager") return true;
-    
-        if (currentUser.role === "agent") {
-            return (
-                ticket.assignedTo === selectedAgentId ||
-                !ticket.assignedTo ||
-                ticket.assignedTo.trim() === ""
-            );
-        }
-    
-        return false;
-    });
-
-
     //filter tickets based on search input:
-    const filteredTickets = roleFilteredTickets.filter((ticket) => {
+    const filteredTickets = tickets.filter((ticket) => {
         const query = (searchQuery || "").toLowerCase();
     
         const title = (ticket?.title || "").toString().toLowerCase();
@@ -61,19 +45,6 @@ function Dashboard({ tickets, deleteTicket, assignToMe, setTickets, currentUser,
     
         return matchesSearch && matchesStatus && matchesPriority && matchesCategory;
     });
-
-    const assignTicket = (ticketId, agentId) => {//assign by manager
-        setTickets((prev) => {
-            const updated = prev.map((t) =>
-                t.id === ticketId
-                    ? { ...t, assignedTo: agentId, status: "In Progress" }
-                    : t
-            );
-    
-            CommonHomeUtils.saveTickets(updated);
-            return updated;
-        });
-    };
 
     return (
         <>
@@ -149,9 +120,6 @@ function Dashboard({ tickets, deleteTicket, assignToMe, setTickets, currentUser,
                                 ticket={ticket}
                                 deleteTicket={deleteTicket}
                                 assignToMe={assignToMe}
-                                assignTicket={assignTicket}
-                                agents={agents}
-                                currentUser={currentUser}
                             />
                         ))
                     )}

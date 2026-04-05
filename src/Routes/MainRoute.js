@@ -11,20 +11,19 @@ import CommonHomeUtils from "../Scripts/CommonHomeUtils";
 export default function MainRoute({ tickets, addTicket, deleteTicket, setTickets }){
 
     const assignToMe = (ticketId) => {
+        const currentUser = "Agent A";
+    
         setTickets((prev) => {
             const updated = prev.map((t) =>
                 t.id === ticketId
-                    ? {
-                        ...t,
-                        assignedTo: selectedAgentId,
-                        status: "In Progress"
-                    }
+                    ? { ...t, assignedTo: currentUser }
                     : t
-            );
-    
+            )
             CommonHomeUtils.saveTickets(updated);
+
             return updated;
         });
+
     };
     
     return(
@@ -74,7 +73,7 @@ export default function MainRoute({ tickets, addTicket, deleteTicket, setTickets
                     path = "/dashboard"
                     element = {
                         <Routes>
-                            <Route path = "/" element = {<Dashboard tickets={tickets} deleteTicket={deleteTicket} assignToMe={assignToMe} setTickets={setTickets} currentUser={currentUser} agents = {agents}/>}/>
+                            <Route path = "/" element = {<Dashboard tickets={tickets} deleteTicket={deleteTicket} assignToMe={assignToMe} />}/>
                             <Route path = "/*" element = {<Error404 />}/>
                         </Routes>
                     }
@@ -84,7 +83,7 @@ export default function MainRoute({ tickets, addTicket, deleteTicket, setTickets
                     path = "/ticket/:id"
                     element = {
                         <Routes>
-                            <Route path = "/" element={<TicketDetails tickets={tickets} setTickets={setTickets} assignToMe={assignToMe} currentUser={currentUser} agents = {agents}/>} />
+                            <Route path = "/" element={<TicketDetails tickets={tickets} setTickets={setTickets} assignToMe={assignToMe}/>} />
                             <Route path = "/*" element = {<Error404 />}/>
                         </Routes>
                     }
