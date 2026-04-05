@@ -54,6 +54,7 @@ function TicketCard({ ticket, assignToMe }) {
                         )}
                         <select
                             value={ticket.assignedTo || ""}
+                            onClick={(e) => e.stopPropagation()} 
                             onChange={(e) => {
                                 e.stopPropagation();
                                 handleAssign(e.target.value);
