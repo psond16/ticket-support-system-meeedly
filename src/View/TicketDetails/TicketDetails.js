@@ -36,9 +36,22 @@ function TicketDetail({ tickets, setTickets}) {
             CommonHomeUtils.saveTickets(updated);
 
             return updated;
-            });
+        });
 
         setMessage("");
+    };
+
+    const handlePriorityChange = (newPriority) => {
+        setTickets((prev) => {
+            const updated = prev.map((t) =>
+                t.id === Number(id)
+                    ? { ...t, priority: newPriority }
+                    : t
+            );
+    
+            CommonHomeUtils.saveTickets(updated);
+            return updated;
+        });
     };
 
     return (
@@ -46,7 +59,14 @@ function TicketDetail({ tickets, setTickets}) {
             <h1>{ticket.title}</h1>
 
             <p>Status: {ticket.status}</p>
-            <p>Priority: {ticket.priority}</p>
+            <select
+                value={ticket.priority}
+                onChange={(e) => handlePriorityChange(e.target.value)}
+            >
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
             <p>Category: {ticket.category}</p>
 
             <hr />
