@@ -9,7 +9,7 @@
     justify-content: space-between;
     align-items: center;
 
-    padding: 12px 40px;
+    padding: 12px 30px;
     background-color: #ffffff;
     border-bottom: 1px solid #e5e7eb;
 }
@@ -20,4 +20,30 @@
     object-fit: contain;
     margin-left: 30px;
     margin-top: 10px;
+}
+
+.navbar-left {
+    display: flex;
+    align-items: center;
+    gap: 25px;
+}
+
+.create-ticket-btn {
+    background-color: #ea1d23;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.create-ticket-btn:hover {
+    background-color: #d40909;
+}
+
+.navbar-right{
+    margin-right: 30px;
 }

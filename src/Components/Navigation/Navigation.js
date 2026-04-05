@@ -27,7 +27,7 @@ const Navigation = () => {
                     className="create-ticket-btn"
                     onClick={() => navigate("/create-ticket")}
                 >
-                    + Create Ticket
+                    Create Ticket
                 </button>
             </div>
         </nav>
