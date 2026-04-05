@@ -46,7 +46,7 @@ function TicketCard({ ticket, assignToMe }) {
                             <button
                                 onClick={(e) => {
                                     e.stopPropagation();
-                                    assignToMe(ticket.id);
+                                    assignToMe(ticket.id, "Agent A");
                                 }}
                             >
                                 Assign to me
