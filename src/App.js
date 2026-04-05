@@ -14,8 +14,8 @@ import "./Style/Tablet.css";
 function App() {
 
   const [currentUser, setCurrentUser] = useState({
-    name: "Agent B",
-    role: "user"
+    role: "manager",
+    id: "manager"
   });
 
   const [tickets, setTickets] = useState(() => {
@@ -46,7 +46,8 @@ function App() {
         t.id === id
           ? {
               ...t,
-              assignedTo: "me"
+              assignedTo: currentUser.id,
+              status: "In Progress"
             }
           : t
       );
@@ -67,37 +68,25 @@ function App() {
           onChange={(e) => {
             const role = e.target.value;
 
-            let name = "";
-            if (role === "agent") name = "Agent A";
-            if (role === "manager") name = "Manager";
-            if (role === "user") name = "User";
+            let id = "";
+            if (role === "agent") id = "agent-1";
+            if (role === "manager") id = "manager-1";
 
             setCurrentUser({
               role,
-              name,
-              email: "user@test.com" 
+              id
             });
           }}
         >
-          <option value="user">User</option>
           <option value="agent">Agent</option>
           <option value="manager">Manager</option>
         </select>
 
-        <select
-          value={currentUser.name}
-          onChange={(e) =>
-            setCurrentUser((prev) => ({
-              ...prev,
-              name: e.target.value
-            }))
-          }
-        >
-          <option value="Agent A">Agent A</option>
-          <option value="Agent B">Agent B</option>
-          <option value="Agent C">Agent C</option>
-        </select>
+        <span style={{ marginLeft: "10px" }}>
+          Current: {currentUser.role}
+        </span>
       </div>
+    
       <MainRoute tickets={tickets} addTicket={addTicket} deleteTicket={deleteTicket} setTickets={setTickets} assignToMe={assignToMe} currentUser={currentUser}/>
     </>
   );

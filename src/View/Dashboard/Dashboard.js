@@ -19,17 +19,17 @@ function Dashboard({ tickets, deleteTicket, assignToMe, setTickets, currentUser 
 
     const roleFilteredTickets = tickets.filter((ticket) => {
         if (currentUser.role === "manager") return true;
-      
+    
         if (currentUser.role === "agent") {
-          return ticket.assignedTo === currentUser.name;
+            return (
+                ticket.assignedTo === currentUser.id ||
+                !ticket.assignedTo ||
+                ticket.assignedTo.trim() === ""
+            );
         }
-      
-        if (currentUser.role === "user") {
-          return ticket.email === currentUser.name;
-        }
-      
+    
         return false;
-      });
+    });
 
 
     //filter tickets based on search input:
@@ -152,6 +152,7 @@ function Dashboard({ tickets, deleteTicket, assignToMe, setTickets, currentUser 
                                 assignToMe={assignToMe}
                                 assignTicket={assignTicket}
                                 agents={agents}
+                                currentUser={currentUser}
                             />
                         ))
                     )}

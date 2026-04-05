@@ -8,7 +8,7 @@ import {
 
 import "../../Style/Components/TicketCard/TicketCard.css";
 
-function TicketCard({ ticket, assignToMe, assignTicket, agents }) {
+function TicketCard({ ticket, assignToMe, assignTicket, agents, currentUser }) {
 
     const navigate = useNavigate();
 
@@ -39,7 +39,7 @@ function TicketCard({ ticket, assignToMe, assignTicket, agents }) {
                         </div>
                         {!ticket.assignedTo?.trim() ? (
                             <>
-                                <button
+                                {currentUser.role === "agent" && (<button
                                     onClick={(e) => {
                                         e.stopPropagation();
                                         assignToMe(ticket.id);
@@ -47,19 +47,22 @@ function TicketCard({ ticket, assignToMe, assignTicket, agents }) {
                                 >
                                     Assign to me
                                 </button>
+                                )}
 
-                                <select
-                                    onClick={(e) => e.stopPropagation()}
-                                    onChange={(e) => assignTicket(ticket.id, e.target.value)}
-                                    defaultValue=""
-                                >
-                                    <option value="" disabled>Assign to...</option>
-                                    {agents.map((agent) => (
-                                        <option key={agent} value={agent}>
-                                            {agent}
-                                        </option>
-                                    ))}
-                                </select>
+                                {currentUser.role === "manager" && (
+                                    <select
+                                        onClick={(e) => e.stopPropagation()}
+                                        onChange={(e) => assignTicket(ticket.id, e.target.value)}
+                                        defaultValue=""
+                                    >
+                                        <option value="" disabled>Assign to...</option>
+                                        {agents.map((agent) => (
+                                            <option key={agent} value={agent}>
+                                                {agent}
+                                            </option>
+                                        ))}
+                                    </select>
+                                )}
                             </>
                         ) : (
                             <p>Assigned to: {ticket.assignedTo || "unassigned"}</p>
