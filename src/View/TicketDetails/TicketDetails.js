@@ -55,6 +55,13 @@ function TicketDetail({ tickets, setTickets}) {
     };
 
     const handleCloseTicket = () => {
+
+        const confirmClose = window.confirm(
+            "Are you sure you want to close this ticket? This action cannot be undone."
+        );
+    
+        if (!confirmClose) return;
+        
         setTickets((prev) => {
             const updated = prev.map((t) =>
                 t.id === Number(id)
