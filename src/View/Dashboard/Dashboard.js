@@ -6,7 +6,7 @@ import TicketCard from "../../Components/TicketCard/TicketCard";
 import "../../Style//Dashboard/Dashboard.css";
 import CommonHomeUtils from "../../Scripts/CommonHomeUtils";
 
-function Dashboard({ tickets, deleteTicket, assignToMe, setTickets }) {
+function Dashboard({ tickets, deleteTicket, assignToMe, setTickets, currentUser }) {
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState("");//search state to filter queries
     const agents = ["Agent A", "Agent B", "Agent C"];
@@ -17,8 +17,23 @@ function Dashboard({ tickets, deleteTicket, assignToMe, setTickets }) {
     const [categoryFilter, setCategoryFilter] = useState("");
 
 
+    const roleFilteredTickets = tickets.filter((ticket) => {
+        if (currentUser.role === "manager") return true;
+      
+        if (currentUser.role === "agent") {
+          return ticket.assignedTo === currentUser.name;
+        }
+      
+        if (currentUser.role === "user") {
+          return ticket.email === currentUser.name;
+        }
+      
+        return false;
+      });
+
+
     //filter tickets based on search input:
-    const filteredTickets = tickets.filter((ticket) => {
+    const filteredTickets = roleFilteredTickets.filter((ticket) => {
         const query = (searchQuery || "").toLowerCase();
     
         const title = (ticket?.title || "").toString().toLowerCase();

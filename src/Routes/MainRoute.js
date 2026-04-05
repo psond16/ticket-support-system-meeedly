@@ -8,7 +8,7 @@ import Dashboard from "../View/Dashboard/Dashboard";
 import TicketDetails from "../View/TicketDetails/TicketDetails";
 import CommonHomeUtils from "../Scripts/CommonHomeUtils";
 
-export default function MainRoute({ tickets, addTicket, deleteTicket, setTickets }){
+export default function MainRoute({ tickets, addTicket, deleteTicket, setTickets, currentUser }){
 
     const assignToMe = (ticketId) => {
         const currentUser = "Agent A";
@@ -73,7 +73,7 @@ export default function MainRoute({ tickets, addTicket, deleteTicket, setTickets
                     path = "/dashboard"
                     element = {
                         <Routes>
-                            <Route path = "/" element = {<Dashboard tickets={tickets} deleteTicket={deleteTicket} assignToMe={assignToMe} setTickets={setTickets}/>}/>
+                            <Route path = "/" element = {<Dashboard tickets={tickets} deleteTicket={deleteTicket} assignToMe={assignToMe} setTickets={setTickets} currentUser={currentUser}/>}/>
                             <Route path = "/*" element = {<Error404 />}/>
                         </Routes>
                     }
@@ -83,7 +83,7 @@ export default function MainRoute({ tickets, addTicket, deleteTicket, setTickets
                     path = "/ticket/:id"
                     element = {
                         <Routes>
-                            <Route path = "/" element={<TicketDetails tickets={tickets} setTickets={setTickets} assignToMe={assignToMe}/>} />
+                            <Route path = "/" element={<TicketDetails tickets={tickets} setTickets={setTickets} assignToMe={assignToMe} currentUser={currentUser}/>} />
                             <Route path = "/*" element = {<Error404 />}/>
                         </Routes>
                     }

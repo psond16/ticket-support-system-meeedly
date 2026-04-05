@@ -13,6 +13,11 @@ import "./Style/Tablet.css";
 
 function App() {
 
+  const [currentUser, setCurrentUser] = useState({
+    name: "Agent B",
+    role: "user"
+  });
+
   const [tickets, setTickets] = useState(() => {
     return CommonHomeUtils.getSavedTickets();
   });
@@ -53,7 +58,47 @@ function App() {
 
   return (
     <>
-      <MainRoute tickets={tickets} addTicket={addTicket} deleteTicket={deleteTicket} setTickets={setTickets} assignToMe={assignToMe}/>
+
+      <div style={{ padding: "10px", borderBottom: "1px solid #ccc" }}>
+        <strong>Switch Role:</strong>
+
+        <select
+          value={currentUser.role}
+          onChange={(e) => {
+            const role = e.target.value;
+
+            let name = "";
+            if (role === "agent") name = "Agent A";
+            if (role === "manager") name = "Manager";
+            if (role === "user") name = "User";
+
+            setCurrentUser({
+              role,
+              name,
+              email: "user@test.com" 
+            });
+          }}
+        >
+          <option value="user">User</option>
+          <option value="agent">Agent</option>
+          <option value="manager">Manager</option>
+        </select>
+
+        <select
+          value={currentUser.name}
+          onChange={(e) =>
+            setCurrentUser((prev) => ({
+              ...prev,
+              name: e.target.value
+            }))
+          }
+        >
+          <option value="Agent A">Agent A</option>
+          <option value="Agent B">Agent B</option>
+          <option value="Agent C">Agent C</option>
+        </select>
+      </div>
+      <MainRoute tickets={tickets} addTicket={addTicket} deleteTicket={deleteTicket} setTickets={setTickets} assignToMe={assignToMe} currentUser={currentUser}/>
     </>
   );
 };
