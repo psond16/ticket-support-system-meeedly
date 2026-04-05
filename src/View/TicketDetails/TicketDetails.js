@@ -90,7 +90,7 @@ function TicketDetail({ tickets, setTickets}) {
                 {ticket.messages.length === 0 ? (
                     <p>No messages yet</p>
                 ) : (
-                    ticket.messages.map((msg, index) => (//to separate user and agent reply 
+                    ticket.messages.map((msg, index) => (
                         <div
                             key={index}
                             style={{
@@ -103,13 +103,29 @@ function TicketDetail({ tickets, setTickets}) {
                                     display: "inline-block",
                                     padding: "8px 12px",
                                     borderRadius: "10px",
-                                    backgroundColor:
-                                        msg.sender === "user" ? "#e5e5e5" : "#cce5ff"
+                                    backgroundColor: msg.sender === "user" ? "#e5e5e5" : "#cce5ff",
+                                    maxWidth: "250px"
                                 }}
                             >
-                                <p style={{ margin: 0 }}>
-                                    <strong>{msg.sender}:</strong> {msg.text}
-                                </p>
+                                {/* text */}
+                                {msg.text && (
+                                    <p style={{ margin: 0 }}>
+                                        <strong>{msg.sender}:</strong> {msg.text}
+                                    </p>
+                                )}
+                    
+                                {/* image */}
+                                {msg.attachment && (
+                                    <img
+                                        src={msg.attachment}
+                                        alt="attachment"
+                                        style={{
+                                            width: "100%",
+                                            marginTop: msg.text ? "8px" : "0",
+                                            borderRadius: "8px"
+                                        }}
+                                    />
+                                )}
                             </div>
                     
                             <small>

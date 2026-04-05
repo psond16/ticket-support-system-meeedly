@@ -15,24 +15,34 @@ function TicketCreation({ addTicket }){
     const handleSubmit = (e) => {
         e.preventDefault();
         
+
+        const messages = [
+            {
+                text: description,
+                time: new Date().toISOString(),
+                sender: "user"
+            }
+        ];
+        
+        if (attachment) {
+            messages.push({
+                text: "",
+                time: new Date().toISOString(),
+                sender: "user",
+                attachment: URL.createObjectURL(attachment)
+            });
+        }
         //to create a new ticket object from user input
         const newTicket = {
             id: Date.now(),
             title: title,
             category,
-            attachment,
             firstName,
             lastName,
             email,
             status: "Open",
             priority: "Low",
-            messages: [
-                {
-                    text: description,
-                    time: new Date().toISOString(),
-                    sender: "user"
-                }
-            ],
+            messages: messages,
             createdAt: new Date().toISOString(),
             assignedTo: null
         };
