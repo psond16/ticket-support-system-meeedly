@@ -141,7 +141,7 @@ function TicketCreation({ addTicket }){
                     />
                 </div>
 
-                <button type="submit" disabled={!title || !description || !category || !email}>Create ticket</button>
+                <button type="submit" disabled={!title.trim() || !description.trim() || !category || !email}>Create ticket</button>
             </form>
         </div>
     );
