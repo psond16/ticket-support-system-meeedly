@@ -63,15 +63,18 @@ function TicketCreation({ addTicket }){
     };
 
     return(
-        <div>
+        <div className = "form-container">
             <Navbar />
-            <h1>Create Ticket</h1>
+            <h3>Meeedly Support Form</h3>
+            <p>All fields marked with an asterisk (*) are required.</p>
+
+            <p>Please briefly complete the fields below, and consider adding a screenshot to help us further understand the issue, if applicable.  You will receive a response from program staff within 24 business hours (3 Days).</p>
 
             <form onSubmit={handleSubmit}>
 
                 {/* TITLE OF TICKET*/}
                 <div>
-                    <label>Title</label>
+                    <label>Title of Ticket</label>
                     <input 
                         type="text"
                         value = {title}
@@ -91,7 +94,7 @@ function TicketCreation({ addTicket }){
                         value={category}
                         onChange={(e) => setCategory(e.target.value)}
                         >
-                        <option value="">Select category</option>
+                        <option value="">Support Area</option>
                         <option value="General">General</option>
                         <option value="Technical">Technical</option>
                         <option value="Billing">Billing</option>
@@ -101,16 +104,17 @@ function TicketCreation({ addTicket }){
                 
                 {/* ABOUT THE TICKET*/}
                 <div>
-                    <label>Description</label>
+                    <label>Description of Ticket</label>
                     <textarea
                     value = {description}
-                    placeholder="Describe your issue..."
+                    placeholder="Please describe your response in detail"
                     onChange={(e) => setDescription(e.target.value)}
                     />
                 </div>
 
                 {/* PICTURE ABOUT THE TICKET*/}
                 <div>
+                    <label>Attachment</label>
                     <input
                         type="file"
                         onChange={(e) => setAttachment(e.target.files[0])}
@@ -157,13 +161,6 @@ function TicketCreation({ addTicket }){
                     Create ticket
                 </button>
 
-                <button
-                    type="button"
-                    onClick={() => navigate("/dashboard")}
-                    style={{ marginTop: "10px" }}
-                >
-                    Go to Dashboard
-                </button>
             </form>
         </div>
     );
