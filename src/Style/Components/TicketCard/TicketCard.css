@@ -31,6 +31,7 @@
     flex-direction: column;
     gap: 4px;
     flex: 1;
+    min-width: 0;
 }
 
 .ticket-left h4 {
@@ -53,10 +54,16 @@
     cursor: pointer;
 }
 
+.ticket-title {
+    min-width: 0;
+}
+
 .ticket-title h4 {
     margin: 0;
-    font-size: 18px;
-    font-weight: 600;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .ticket-meta {
@@ -83,6 +90,7 @@
     color: #444;
     margin-left: auto;
 
+    flex-shrink: 0;
 }
 
 .status-badge {
