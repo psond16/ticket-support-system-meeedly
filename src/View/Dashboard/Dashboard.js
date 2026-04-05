@@ -6,10 +6,9 @@ import TicketCard from "../../Components/TicketCard/TicketCard";
 import "../../Style//Dashboard/Dashboard.css";
 import CommonHomeUtils from "../../Scripts/CommonHomeUtils";
 
-function Dashboard({ tickets, deleteTicket, assignToMe, setTickets, currentUser }) {
+function Dashboard({ tickets, deleteTicket, assignToMe, setTickets, currentUser, agents, selectedAgentId }) {
     const navigate = useNavigate();
     const [searchQuery, setSearchQuery] = useState("");//search state to filter queries
-    const agents = ["Agent A", "Agent B", "Agent C"];
 
     //filter states
     const [statusFilter, setStatusFilter] = useState("");
@@ -22,7 +21,7 @@ function Dashboard({ tickets, deleteTicket, assignToMe, setTickets, currentUser 
     
         if (currentUser.role === "agent") {
             return (
-                ticket.assignedTo === currentUser.id ||
+                ticket.assignedTo === selectedAgentId ||
                 !ticket.assignedTo ||
                 ticket.assignedTo.trim() === ""
             );
@@ -63,11 +62,11 @@ function Dashboard({ tickets, deleteTicket, assignToMe, setTickets, currentUser 
         return matchesSearch && matchesStatus && matchesPriority && matchesCategory;
     });
 
-    const assignTicket = (ticketId, agentName) => {//assign by manager
+    const assignTicket = (ticketId, agentId) => {//assign by manager
         setTickets((prev) => {
             const updated = prev.map((t) =>
                 t.id === ticketId
-                    ? { ...t, assignedTo: agentName, status: "In Progress" }
+                    ? { ...t, assignedTo: agentId, status: "In Progress" }
                     : t
             );
     

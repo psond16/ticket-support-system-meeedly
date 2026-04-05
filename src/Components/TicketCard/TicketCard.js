@@ -57,15 +57,15 @@ function TicketCard({ ticket, assignToMe, assignTicket, agents, currentUser }) {
                                     >
                                         <option value="" disabled>Assign to...</option>
                                         {agents.map((agent) => (
-                                            <option key={agent} value={agent}>
-                                                {agent}
+                                            <option key={agent} value={agent.id}>
+                                                {agent.name}
                                             </option>
                                         ))}
                                     </select>
                                 )}
                             </>
                         ) : (
-                            <p>Assigned to: {ticket.assignedTo || "unassigned"}</p>
+                            <p>Assigned to: {agents.find(a => a.id === ticket.assignedTo)?.name || "Unassigned"}</p>
                         )}
                         <span>
                             {DateFormats.timeAgoFormat(ticket.createdAt)}
