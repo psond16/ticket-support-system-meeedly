@@ -13,6 +13,8 @@ function TicketCreation({ addTicket }){
 
     const TITLE_LIMIT = 70;
 
+    const [success, setSuccess] = useState("");
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -50,11 +52,12 @@ function TicketCreation({ addTicket }){
         };
 
         addTicket(newTicket);
+        setSuccess("Ticket created successfully!");
 
         setTitle("");
         setDescription("");
 
-        navigate("/dashboard");//redirect to dashboard
+
     };
 
     return(
