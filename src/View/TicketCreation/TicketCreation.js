@@ -144,6 +144,12 @@ function TicketCreation({ addTicket }){
                     />
                 </div>
 
+                {success && (
+                    <p style={{ color: "green", marginTop: "10px" }}>
+                        {success}
+                    </p>
+                )}
+
                 <button type="submit" disabled={!title.trim() || !description.trim() || !category || !email}>
                     Create ticket
                 </button>
