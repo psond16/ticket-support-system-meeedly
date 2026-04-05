@@ -11,6 +11,8 @@ function TicketCreation({ addTicket }){
     const [category, setCategory] = useState("");
     const navigate = useNavigate();
 
+    const TITLE_LIMIT = 70;
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -35,7 +37,7 @@ function TicketCreation({ addTicket }){
         //to create a new ticket object from user input
         const newTicket = {
             id: Date.now(),
-            title: title,
+            title: title.length > 70 ? title.slice(0, 70) + "..." : title,
             category,
             firstName,
             lastName,
@@ -68,8 +70,13 @@ function TicketCreation({ addTicket }){
                         type="text"
                         value = {title}
                         placeholder="Enter ticket title"
+                        maxLength={TITLE_LIMIT}
                         onChange={(e) => setTitle(e.target.value)}
                      />
+                </div>
+
+                <div style={{ fontSize: "12px", marginTop: "4px" }}>
+                    {title.length}/{TITLE_LIMIT}
                 </div>
                 
                 {/* CATEGORY OF TICKET*/}

@@ -69,7 +69,7 @@ function TicketDetail({ tickets, setTickets}) {
 
     return (
         <div>
-            <h1>{ticket.title}</h1>
+            <h1 className = "ticket-detail-title">{ticket.title}</h1>
 
             <p>Status: {ticket.status}</p>
             <select
