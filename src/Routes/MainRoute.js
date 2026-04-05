@@ -11,20 +11,22 @@ import CommonHomeUtils from "../Scripts/CommonHomeUtils";
 export default function MainRoute({ tickets, addTicket, deleteTicket, setTickets }){
 
     const assignToMe = (ticketId) => {
-        const currentUser = "Agent A";
-    
         setTickets((prev) => {
             const updated = prev.map((t) =>
                 t.id === ticketId
-                    ? { ...t, assignedTo: currentUser }
+                    ? {
+                        ...t,
+                        assignedTo: "Agent A",
+                        status: "In Progress"
+                    }
                     : t
-            )
-            CommonHomeUtils.saveTickets(updated);
+            );
 
+            CommonHomeUtils.saveTickets(updated);
             return updated;
         });
-
     };
+    
     
     return(
         <>
