@@ -10,13 +10,13 @@ import CommonHomeUtils from "../Scripts/CommonHomeUtils";
 
 export default function MainRoute({ tickets, addTicket, deleteTicket, setTickets }){
 
-    const assignToMe = (ticketId) => {
+    const assignToMe = (ticketId, agentName) => {
         setTickets((prev) => {
             const updated = prev.map((t) =>
                 t.id === ticketId
                     ? {
                         ...t,
-                        assignedTo: "Agent A",
+                        assignedTo: agentName,
                         status: "In Progress"
                     }
                     : t

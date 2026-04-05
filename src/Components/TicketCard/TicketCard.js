@@ -9,8 +9,13 @@ import {
 import "../../Style/Components/TicketCard/TicketCard.css";
 
 function TicketCard({ ticket, assignToMe }) {
+    const Agents = ["Agent A", "Agent B", "Agent C"];
 
     const navigate = useNavigate();
+
+    const handleAssign = (agentName) => {
+        assignToMe(ticket.id, agentName);
+    };
 
     return (
         <NoplinCardGeneral className="ticket-row" onClick={() => navigate(`/ticket/${ticket.id}`)}>
@@ -37,20 +42,39 @@ function TicketCard({ ticket, assignToMe }) {
                         <div className={`status-badge ${ticket.status.toLowerCase().replace(" ", "-")}`}>
                             {ticket.status}
                         </div>
-                        {!ticket.assignedTo ? (
+                        {!ticket.assignedTo && (
                             <button
                                 onClick={(e) => {
                                     e.stopPropagation();
                                     assignToMe(ticket.id);
                                 }}
                             >
-                            Assign to me
-                        </button>
-                        ) : (
-                            <p>
-                                Assigned to: {ticket.assignedTo}
-                            </p>
+                                Assign to me
+                            </button>
                         )}
+                        <select
+                            value={ticket.assignedTo || ""}
+                            onChange={(e) => {
+                                e.stopPropagation();
+                                handleAssign(e.target.value);
+                            }}
+                        >
+                            <option value="">Unassigned</option>
+
+                            {["Agent A", "Agent B", "Agent C"].map((agent) => (
+                                <option key={agent} value={agent}>
+                                    {agent}
+                                </option>
+                            ))}
+                        </select>
+
+                                {ticket.assignedTo && (
+                                    <p>
+                                        Assigned to: <strong>{ticket.assignedTo}</strong>
+                                    </p>
+                                )}
+
+                            )
                         <span>
                             {DateFormats.timeAgoFormat(ticket.createdAt)}
                         </span>
