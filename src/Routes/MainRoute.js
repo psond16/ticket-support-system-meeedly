@@ -8,7 +8,7 @@ import Dashboard from "../View/Dashboard/Dashboard";
 import TicketDetails from "../View/TicketDetails/TicketDetails";
 import CommonHomeUtils from "../Scripts/CommonHomeUtils";
 
-export default function MainRoute({ tickets, addTicket, deleteTicket, setTickets, currentUser, agents, selectedAgentId }){
+export default function MainRoute({ tickets, addTicket, deleteTicket, setTickets }){
 
     const assignToMe = (ticketId) => {
         setTickets((prev) => {
