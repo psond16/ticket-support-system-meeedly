@@ -1,0 +1,23 @@
+.navbar a {
+    text-decoration: none;
+    color: inherit;
+    margin-right: 40px;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 12px 40px;
+    background-color: #ffffff;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.navbar-logo {
+    height: 80px;
+    width: auto;
+    object-fit: contain;
+    margin-left: 30px;
+    margin-top: 10px;
+}
