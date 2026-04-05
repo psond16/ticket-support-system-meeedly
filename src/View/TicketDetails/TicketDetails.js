@@ -9,6 +9,8 @@ function TicketDetail({ tickets, setTickets}) {
 
     const ticket = tickets.find((t) => t.id === Number(id)); // to connect to right ticket object
 
+    const isAssigned = !!ticket.assignedTo;
+
     if (!ticket) {
         return <h2>Ticket not found</h2>;
     }
@@ -61,7 +63,7 @@ function TicketDetail({ tickets, setTickets}) {
         );
     
         if (!confirmClose) return;
-        
+
         setTickets((prev) => {
             const updated = prev.map((t) =>
                 t.id === Number(id)
@@ -144,14 +146,24 @@ function TicketDetail({ tickets, setTickets}) {
             </div>
 
             <hr />
+            
 
+            {!isAssigned && (
+                <p style={{ color: "orange" }}>
+                    This ticket must be assigned before you can reply or close it.
+                </p>
+            )}
 
             <div>
                 <input
                     type="text"
                     value={message}
-                    disabled={ticket.status === "Closed"}
-                    placeholder="Type a response..."
+                    disabled={ticket.status === "Closed" || !isAssigned}
+                    placeholder={
+                        !isAssigned
+                            ? "Ticket not Assigned"
+                            : "Type a response..."
+                    }
                     onChange={(e) => setMessage(e.target.value)}
                     onKeyDown={(e) => {
                         if (e.key === "Enter" && message.trim()) {
@@ -160,12 +172,12 @@ function TicketDetail({ tickets, setTickets}) {
                     }}
                 />
 
-                <button onClick={handleSend} disabled={ticket.status === "Closed"}>
+                <button onClick={handleSend} disabled={ticket.status === "Closed" || !isAssigned}>
                     Send
                 </button>
 
                 {ticket.status !== "Closed" && (
-                    <button onClick={handleCloseTicket}>
+                    <button onClick={handleCloseTicket} disabled = {!isAssigned}>
                         Close Ticket
                     </button>
                 )}
