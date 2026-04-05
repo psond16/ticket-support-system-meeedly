@@ -4,6 +4,7 @@ import { GeneralSearch } from "noplin-uis";
 
 import TicketCard from "../../Components/TicketCard/TicketCard";
 import "../../Style//Dashboard/Dashboard.css";
+import Navbar from "../../Components/Navigation/Navigation";
 
 function Dashboard({ tickets, deleteTicket, assignToMe }) {
     const [visibleCount, setVisibleCount] = useState(10);
@@ -52,6 +53,7 @@ function Dashboard({ tickets, deleteTicket, assignToMe }) {
 
     return (
         <>
+            <Navbar />
             <div className = "search-wrapper">
             {/* search bar using NOPLIN UI component */}
                 <GeneralSearch
@@ -105,8 +107,6 @@ function Dashboard({ tickets, deleteTicket, assignToMe }) {
 </div>
         
             <div>
-
-                <h1>Dashboard</h1>
 
                 {/* create new ticket */}
                 <button onClick={() => navigate("/create-ticket")}>Create New Ticket</button>

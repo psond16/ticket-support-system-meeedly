@@ -1,6 +1,7 @@
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import CommonHomeUtils from "../../Scripts/CommonHomeUtils";
+import Navbar from "../../Components/Navigation/Navigation";
 
 function TicketDetail({ tickets, setTickets}) {
 
@@ -78,6 +79,7 @@ function TicketDetail({ tickets, setTickets}) {
 
     return (
         <div>
+            <Navbar />
             <h1 className = "ticket-detail-title">{ticket.title}</h1>
 
             <p>Status: {ticket.status}</p>
