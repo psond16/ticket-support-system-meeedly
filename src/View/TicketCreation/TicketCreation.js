@@ -144,7 +144,17 @@ function TicketCreation({ addTicket }){
                     />
                 </div>
 
-                <button type="submit" disabled={!title.trim() || !description.trim() || !category || !email}>Create ticket</button>
+                <button type="submit" disabled={!title.trim() || !description.trim() || !category || !email}>
+                    Create ticket
+                </button>
+
+                <button
+                    type="button"
+                    onClick={() => navigate("/dashboard")}
+                    style={{ marginTop: "10px" }}
+                >
+                    Go to Dashboard
+                </button>
             </form>
         </div>
     );
