@@ -1,6 +1,8 @@
 import {useState} from "react";
 import { useNavigate } from "react-router-dom";
 
+import Navbar from "../../Components/Navigation/Navigation";
+
 function TicketCreation({ addTicket }){
     const [title, setTitle] = useState("");
     const [description, setDescription] = useState(""); 
@@ -62,6 +64,7 @@ function TicketCreation({ addTicket }){
 
     return(
         <div>
+            <Navbar />
             <h1>Create Ticket</h1>
 
             <form onSubmit={handleSubmit}>

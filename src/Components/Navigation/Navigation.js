@@ -7,10 +7,10 @@ const Navigation = () => {
         <nav className="navbar">
         <Link to= "/" className="navbar-brand">
             < img src = {logo} alt="Meeedly Logo" className="navbar-logo" />
-            React Guide
         </Link>
         <div className="navbar-links">
             <Link to="/">Home</Link>
+            <Link to="/dashboard">Dashboard</Link>
             <Link to="/about">About</Link>
             <Link to="/settings">Settings</Link>
             </div>
