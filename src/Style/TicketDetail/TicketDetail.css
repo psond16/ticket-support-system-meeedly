@@ -112,10 +112,31 @@
 
 
 .avatar-fixed {
-    flex-shrink: 0;
-    display: inline-flex;
+    border-radius: 50%;
+    display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    overflow: hidden;
+}
+
+
+
+.avatar-fixed .status,
+.avatar-fixed [class*="status"],
+.avatar-fixed .status-indicator {
+    border-radius: 50%;
+    position: absolute;
+    bottom: 5px;
+    right: 8px;
+    transform: translate(25%, 25%);
+}
+
+/* status dot */
+.avatar-fixed .status,
+.avatar-fixed [class*="status"],
+.avatar-fixed .status-indicator {
+    border-radius: 50%;
 }
 
 .ticket-top-strip {

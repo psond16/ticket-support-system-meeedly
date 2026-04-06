@@ -162,13 +162,15 @@ function TicketDetail({ tickets, setTickets}) {
 
             {/* CONVERSATION */}
             <div className="conversation-header">
-                <Avatar
-                    className="avatar-fixed"
-                    size={40}
-                    name={`${ticket.firstName} ${ticket.lastName}`}
-                    statusColor="yellow"
-                    image=""
-                />
+                <div className="avatar-wrapper">
+                    <Avatar
+                        className="avatar-fixed"
+                        size={40}
+                        name={`${ticket.firstName} ${ticket.lastName}`}
+                        statusColor="red"
+                        image=""
+                    />
+                </div>
 
                 <span className="conversation-user">
                 {`${ticket.firstName} ${ticket.lastName}`}
