@@ -1,7 +1,7 @@
 import {useState} from "react";
 import { useNavigate } from "react-router-dom";
 
-import { TextField, TextAreaField } from "noplin-uis";
+import { TextField, TextAreaField, DropDown } from "noplin-uis";
 
 import Navbar from "../../Components/Navigation/Navigation";
 import "../../Style/TicketCreation/TicketCreation.css";
@@ -101,7 +101,7 @@ function TicketCreation({ addTicket }){
                         <select
                             value={category}
                             onChange={(e) => setCategory(e.target.value)}
-                            >
+                        >
                             <option value="">Support Area</option>
                             <option value="General">General</option>
                             <option value="Technical">Technical</option>
