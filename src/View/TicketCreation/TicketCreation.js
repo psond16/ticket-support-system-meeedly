@@ -1,6 +1,8 @@
 import {useState} from "react";
 import { useNavigate } from "react-router-dom";
 
+import { TextField, TextAreaField } from "noplin-uis";
+
 import Navbar from "../../Components/Navigation/Navigation";
 import "../../Style/TicketCreation/TicketCreation.css";
 
@@ -76,12 +78,15 @@ function TicketCreation({ addTicket }){
 
                     {/* TITLE OF TICKET*/}
                     <div className = "form-group">
-                        <label>Title of Ticket</label>
-                        <input 
-                            type="text"
-                            value = {title}
+                        <TextField 
+                            className="test-class"
+                            label={{
+                                material: false,
+                                content: "Title of Ticket",
+                                className: "test-class-label",
+                            }}
+                            value={title}
                             placeholder="Enter ticket title"
-                            maxLength={TITLE_LIMIT}
                             onChange={(e) => setTitle(e.target.value)}
                         />
                     </div>
@@ -106,11 +111,17 @@ function TicketCreation({ addTicket }){
                     
                     {/* ABOUT THE TICKET*/}
                     <div className = "form-group">
-                        <label>Description of Ticket</label>
-                        <textarea
-                        value = {description}
-                        placeholder="Please describe your response in detail"
-                        onChange={(e) => setDescription(e.target.value)}
+                        <TextAreaField
+                            className="test-class"
+                            label={{
+                                material: false,
+                                content: "Description of Ticket",
+                                className: "test-class-label"
+                            }}
+                            value={description}
+                            onChange={(e) => setDescription(e.target.value)}
+                            placeholder="Please describe your response in detail"
+                            resize
                         />
                     </div>
 
@@ -125,32 +136,38 @@ function TicketCreation({ addTicket }){
                     
                     {/* FIRST NAME OF USER*/}
                     <div className = "form-group">
-                        <input
-                            type="text"
+                        <TextField
+                            label={{
+                                material: false,
+                                content: "First Name",
+                            }}
                             value={firstName}
-                            placeholder="First name"
                             onChange={(e) => setFirstName(e.target.value)}
                         />
                     </div>
 
                     {/* LAST NAME OF USER*/}
                     <div className = "form-group">
-                        <input
-                            type="text"
-                            value={lastName}
-                            placeholder="Last name"
-                            onChange={(e) => setLastName(e.target.value)}
-                        />
+                    <TextField
+                        label={{
+                            material: false,
+                            content: "Last Name",
+                        }}
+                        value={lastName}
+                        onChange={(e) => setLastName(e.target.value)}
+                    />
                     </div>
 
                     {/* EMAIL OF USER*/}
                     <div className = "form-group">
-                        <input
-                            type="email"
-                            value={email}
-                            placeholder="Email"
-                            onChange={(e) => setEmail(e.target.value)}
-                        />
+                    <TextField
+                        label={{
+                            material: false,
+                            content: "Email",
+                        }}
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                    />
                     </div>
 
                     {success && (
