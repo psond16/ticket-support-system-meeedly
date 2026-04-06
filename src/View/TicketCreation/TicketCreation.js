@@ -97,6 +97,7 @@ function TicketCreation({ addTicket }){
                     
                     {/* CATEGORY OF TICKET*/}
                     <div className = "form-group">
+                        <label>Support Area</label>
                         <select
                             value={category}
                             onChange={(e) => setCategory(e.target.value)}
@@ -171,7 +172,7 @@ function TicketCreation({ addTicket }){
                     </div>
 
                     {success && (
-                        <p style={{ color: "green", marginTop: "10px" }}>
+                        <p className = "success-message">
                             {success}
                         </p>
                     )}
