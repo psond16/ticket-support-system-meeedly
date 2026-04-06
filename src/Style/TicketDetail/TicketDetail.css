@@ -1,12 +1,16 @@
 .ticket-detail-container {
-    padding: 20px 21px; 
+    padding: 40px 21px 20px;
     max-width: 1100px;
     margin: 0 auto; 
+    
 }
 
 .ticket-detail-title {
     font-weight: 500;
     font-size: 22px;
+    margin-bottom: 4px;
+    word-break: break-word; 
+    
 }
 
 .priority-select {
@@ -79,6 +83,11 @@
     align-items: center;
     gap: 10px;
     flex-wrap: nowrap;
+    border-bottom: 1px solid #e5e7eb;  /* 👈 NEW */
+    padding: 12px 0;  
+
+    top: 52px;
+    position: static;
 }
 
 .conversation-user {
@@ -96,8 +105,109 @@
 }
 
 .ticket-top-strip {
+    position: sticky;
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-top: 4px;
+
+    border-bottom: 1px solid #e5e7eb;
+    padding-bottom: 12px;   
+
+    top: 0;                 
+    z-index: 100; 
+    background: white;
+}
+
+.category-badge,
+.priority-badge,
+.status-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 4px 12px;
+    border-radius: 999px;  
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.category-badge {
+    background-color: #f3f4f6;  
+    color: #374151;
+    border: none;
+}
+
+.ticket-detail-meta {
+    display: flex;
+    gap: 8px;
+    align-items: center;  
+}
+
+.priority-select,
+.close-btn {
+    height: 36px;
+    width: 120px;
+    padding: 0 10px;
+    font-size: 12px;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+.ticket-detail-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.close-btn{
+    margin: 20px auto;
+    padding: 10px 18px;
+    border-radius: 10px;
+    display: block;
+    background: transparent;
+
+    color: #ea1d23;
+    border: 1px solid #ea1d23;
+    padding: 0;
+    
+    font-weight: 600;
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.close-btn:hover{
+    background: #ea1d23;
+    color: white;
+}
+
+.ticket-detail-header {
+    display: block;
+    flex-direction: column;
+    position: relative;
+    top: 0;
+    z-index: 50;
+    background: white;
+    
+}
+
+
+
+.conversation-box {
+    flex: 1;                  
+    padding-right: 6px;   
+}
+
+.ticket-detail-header,
+.ticket-top-strip,
+.conversation-header,
+.reply-box {
+    flex-shrink: 0;
+}
+
+.reply-box {
+    display: flex;
+    gap: 10px;
     margin-top: 10px;
 }

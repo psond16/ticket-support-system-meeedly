@@ -5,7 +5,7 @@ import Navbar from "../../Components/Navigation/Navigation";
 
 import "../../Style/TicketDetail/TicketDetail.css";
 
-import {Avatar,} from "noplin-uis";
+import {Avatar,LightButton,} from "noplin-uis";
 
 function TicketDetail({ tickets, setTickets}) {
 
@@ -121,21 +121,19 @@ function TicketDetail({ tickets, setTickets}) {
                         </select>
 
                         {ticket.status !== "Closed" && (
-                            <button
+                            <LightButton
                                 className="close-btn"
                                 onClick={handleCloseTicket}
                                 disabled={!isAssigned}
                             >
                                 Close Ticket
-                            </button>
+                            </LightButton>
                         )}
                     </div>
 
                 </div>
             </div>
    
-
-            <hr />
 
             {/* CONVERSATION */}
             <div className="conversation-header">
@@ -162,11 +160,7 @@ function TicketDetail({ tickets, setTickets}) {
                             className={msg.sender === "user" ? "msg-left" : "msg-right"}
                         >
                             <div className="message-bubble">
-                                {msg.text && (
-                                    <p className="message-text">
-                                        <strong>{msg.sender}:</strong> {msg.text}
-                                    </p>
-                                )}
+                                {msg.text }
 
                                 {msg.attachment && (
                                     <img
@@ -185,7 +179,6 @@ function TicketDetail({ tickets, setTickets}) {
                 )}
             </div>
 
-            <hr />
 
             {!isAssigned && (
                 <p className="warning-text">
