@@ -32,3 +32,18 @@ input[type="file"] {
     width: 100%;
 }
 
+.test-class textarea {
+    min-height: 150px;
+}
+
+.form-group label {
+    font-weight: 600;
+}
+
+.button-row {
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+
+
+}

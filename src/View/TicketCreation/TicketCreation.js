@@ -1,7 +1,7 @@
 import {useState} from "react";
 import { useNavigate } from "react-router-dom";
 
-import { TextField, TextAreaField, DropDown } from "noplin-uis";
+import { TextField, TextAreaField, DropDown, LightButton } from "noplin-uis";
 
 import Navbar from "../../Components/Navigation/Navigation";
 import "../../Style/TicketCreation/TicketCreation.css";
@@ -89,11 +89,12 @@ function TicketCreation({ addTicket }){
                             placeholder="Enter ticket title"
                             onChange={(e) => setTitle(e.target.value)}
                         />
+
+                        <div style={{ fontSize: "12px", marginTop: "4px" }}>
+                            {title.length}/{TITLE_LIMIT}
+                        </div>
                     </div>
 
-                    <div style={{ fontSize: "12px", marginTop: "4px" }}>
-                        {title.length}/{TITLE_LIMIT}
-                    </div>
                     
                     {/* CATEGORY OF TICKET*/}
                     <div className = "form-group">
@@ -176,10 +177,25 @@ function TicketCreation({ addTicket }){
                             {success}
                         </p>
                     )}
-
-                    <button type="submit" disabled={!title.trim() || !description.trim() || !category || !email}>
-                        Create ticket
-                    </button>
+                    <div className="button-row">
+                        <LightButton
+                            type="submit"
+                            className="npl-submit-btn"
+                            style={{
+                                background: "#ea1d23",
+                                color: "#fff",
+                
+                                padding: "12px",
+                                width: "100px",
+                                fontWeight: 600,
+                                border: "none",
+                                borderRadius: "8px",
+                                fontSize: "17px",
+                            }}
+                        >
+                            Submit
+                        </LightButton>
+                    </div>
 
                 </form>
             </div>
