@@ -167,7 +167,7 @@ function TicketCreation({ addTicket }){
                         <TextField
                             label={{
                                 material: false,
-                                content: "First Name",
+                                content: "First Name *",
                             }}
                             value={firstName}
                             onChange={(e) => setFirstName(e.target.value)}
@@ -179,7 +179,7 @@ function TicketCreation({ addTicket }){
                     <TextField
                         label={{
                             material: false,
-                            content: "Last Name",
+                            content: "Last Name *",
                         }}
                         value={lastName}
                         onChange={(e) => setLastName(e.target.value)}
@@ -198,17 +198,7 @@ function TicketCreation({ addTicket }){
                     />
                     </div>
 
-                    {success && (
-                        <p className = "success-message">
-                            {success}
-                        </p>
-                    )}
 
-                    {error && (
-                        <p className="error-message">
-                            {error}
-                        </p>
-                    )}
                     <div className="button-row">
                         <LightButton
                             type="submit"
@@ -230,6 +220,18 @@ function TicketCreation({ addTicket }){
                             Submit
                         </LightButton>
                     </div>
+
+                    {success && (
+                        <p className = "success-message">
+                            {success}
+                        </p>
+                    )}
+
+                    {error && (
+                        <p className="error-message">
+                            {error}
+                        </p>
+                    )}
 
                 </form>
             </div>

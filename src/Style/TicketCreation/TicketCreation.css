@@ -50,6 +50,7 @@ input[type="file"] {
 
 .attachment-input{
     font-weight: 600;
+    margin-bottom: 20px;
 }
 
 .form-header{
