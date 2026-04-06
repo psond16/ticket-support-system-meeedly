@@ -4,6 +4,7 @@ import CommonHomeUtils from "../../Scripts/CommonHomeUtils";
 import Navbar from "../../Components/Navigation/Navigation";
 
 import "../../Style/TicketDetail/TicketDetail.css";
+import Footer from "../../Components/Footer/Footer";
 
 import {Avatar,LightButton,TextField} from "noplin-uis";
 
@@ -249,9 +250,10 @@ function TicketDetail({ tickets, setTickets}) {
 
 
         </div>
+        <Footer />
     
     </div>
-
+    
 );
 }
 

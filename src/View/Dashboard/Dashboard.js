@@ -5,6 +5,7 @@ import { GeneralSearch, LightButton } from "noplin-uis";
 import TicketCard from "../../Components/TicketCard/TicketCard";
 import "../../Style//Dashboard/Dashboard.css";
 import Navbar from "../../Components/Navigation/Navigation";
+import Footer from "../../Components/Footer/Footer";
 
 function Dashboard({ tickets, deleteTicket, assignToMe }) {
     const [visibleCount, setVisibleCount] = useState(10);
@@ -146,7 +147,10 @@ function Dashboard({ tickets, deleteTicket, assignToMe }) {
                     </div>
 
                 </div>
+          
             </div>
+            <Footer />
+       
         </>
     );
 }

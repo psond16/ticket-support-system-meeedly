@@ -5,6 +5,7 @@ import { TextField, TextAreaField, DropDown, LightButton } from "noplin-uis";
 
 import Navbar from "../../Components/Navigation/Navigation";
 import "../../Style/TicketCreation/TicketCreation.css";
+import Footer from "../../Components/Footer/Footer";
 
 function TicketCreation({ addTicket }){
     const [title, setTitle] = useState("");
@@ -235,6 +236,7 @@ function TicketCreation({ addTicket }){
 
                 </form>
             </div>
+            <Footer />
         </div>
     );
 }
