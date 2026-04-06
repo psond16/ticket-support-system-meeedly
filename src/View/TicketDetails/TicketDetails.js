@@ -1,11 +1,11 @@
 import { useParams } from "react-router-dom";
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import CommonHomeUtils from "../../Scripts/CommonHomeUtils";
 import Navbar from "../../Components/Navigation/Navigation";
 
 import "../../Style/TicketDetail/TicketDetail.css";
 
-import {Avatar,LightButton,} from "noplin-uis";
+import {Avatar,LightButton,TextField} from "noplin-uis";
 
 function TicketDetail({ tickets, setTickets}) {
 
@@ -14,11 +14,36 @@ function TicketDetail({ tickets, setTickets}) {
 
     const ticket = tickets.find((t) => t.id === Number(id)); // to connect to right ticket object
 
-    
+    const bottomRef = useRef(null);
+
+    useEffect(() => {
+        if (!ticket) return;
+        bottomRef.current?.scrollIntoView({ behavior: "smooth" });
+    }, [ticket?.messages?.length]);
 
     if (!ticket) {
         return <h2>Ticket not found</h2>;
     }
+
+    const formatDate = (isoString) => {
+        const date = new Date(isoString);
+        return date.toLocaleDateString("en-US", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+        });
+    };
+
+    const groupedMessages = ticket.messages.reduce((groups, msg) => {
+        const dateKey = new Date(msg.time).toDateString();
+    
+        if (!groups[dateKey]) {
+            groups[dateKey] = [];
+        }
+    
+        groups[dateKey].push(msg);
+        return groups;
+    }, {});
 
     const isAssigned = !!ticket.assignedTo;
 
@@ -154,29 +179,34 @@ function TicketDetail({ tickets, setTickets}) {
                 {ticket.messages.length === 0 ? (
                     <p className="empty-text">No messages yet</p>
                 ) : (
-                    ticket.messages.map((msg, index) => (
-                        <div
-                            key={index}
-                            className={msg.sender === "user" ? "msg-left" : "msg-right"}
-                        >
-                            <div className="message-bubble">
-                                {msg.text }
-
-                                {msg.attachment && (
-                                    <img
-                                        src={msg.attachment}
-                                        alt="attachment"
-                                        className="message-image"
-                                    />
-                                )}
+                    Object.entries(groupedMessages).map(([dateKey, msgs]) => (
+                        <div key={dateKey}>
+                            <div className="chat-date-header">
+                                {formatDate(dateKey)}
                             </div>
 
-                            <small className="message-time">
-                                {new Date(msg.time).toLocaleString()}
-                            </small>
+                            {msgs.map((msg, index) => (
+                                <div
+                                    key={index}
+                                    className={msg.sender === "user" ? "msg-left" : "msg-right"}
+                                >
+                                    <div className="message-bubble">
+                                        <p className="message-text">{msg.text}</p>
+
+                                        <span className="message-time">
+                                            {new Date(msg.time).toLocaleTimeString([], {
+                                                hour: "2-digit",
+                                                minute: "2-digit",
+                                                hour12: true
+                                            })}
+                                        </span>
+                                    </div>
+                                </div>
+                            ))}
                         </div>
                     ))
                 )}
+                <div ref={bottomRef} />
             </div>
 
 
@@ -200,17 +230,20 @@ function TicketDetail({ tickets, setTickets}) {
                     className="reply-input"
                 />
 
-                <button
-                    className="send-btn"
-                    onClick={handleSend}
-                    disabled={ticket.status === "Closed" || !isAssigned}
-                >
-                    Send
-                </button>
+                <LightButton
+                        className="send-btn"
+                        onClick={handleSend}
+                        disabled={ticket.status === "Closed" || !isAssigned}
+                    >
+                        Send
+                </LightButton>
             </div>
 
+
         </div>
+    
     </div>
+
 );
 }
 
