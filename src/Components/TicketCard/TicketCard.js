@@ -1,10 +1,7 @@
 import DateFormats from "../../Utilities/DateFormat";
 import { useNavigate } from "react-router-dom";
 
-import {
-    NoplinCardGeneral,
-    NoplinCardBodyArea
-} from "noplin-uis";
+import {NoplinCardGeneral, NoplinCardBodyArea, LightButton} from "noplin-uis";
 
 import "../../Style/Components/TicketCard/TicketCard.css";
 
@@ -25,16 +22,22 @@ function TicketCard({ ticket, assignToMe }) {
 
                     {/* LEFT */}
                     <div className="ticket-left">
-                        <div className="ticket-title">
-                            <h4>{ticket.title}</h4>
+                        <div className="ticket-main">
+                            <div className="ticket-title">
+                                <h4>{ticket.title}</h4>
+                            </div>
+
+                            <div className="ticket-meta">
+                                <span className = "category-badge">{ticket.category}</span>
+                                <span className={`priority-badge ${ticket.priority?.toLowerCase()}`}>
+                                    {ticket.priority}
+                                </span>
+                            </div>
                         </div>
 
-                        <div className="ticket-meta">
-                            <span className = "category-badge">{ticket.category}</span>
-                            <span className={`priority-badge ${ticket.priority?.toLowerCase()}`}>
-                                {ticket.priority}
-                            </span>
-                        </div>
+                        <span className="ticket-time">
+                            {DateFormats.timeAgoFormat(ticket.createdAt)}
+                        </span>
                     </div>
 
                     {/* RIGHT */}
@@ -42,42 +45,43 @@ function TicketCard({ ticket, assignToMe }) {
                         <div className={`status-badge ${ticket.status.toLowerCase().replace(" ", "-")}`}>
                             {ticket.status}
                         </div>
-                        {!ticket.assignedTo && (
-                            <button
-                                onClick={(e) => {
+                        <div className="assign-controls">
+                            {!ticket.assignedTo && (
+                                <LightButton
+                                    className="assign-btn"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        assignToMe(ticket.id, "Agent A");
+                                    }}
+                                >
+                                    Assign to me
+                                </LightButton>
+                            )}
+                            <select
+                                value={ticket.assignedTo || ""}
+                                onClick={(e) => e.stopPropagation()} 
+                                onChange={(e) => {
                                     e.stopPropagation();
-                                    assignToMe(ticket.id, "Agent A");
+                                    handleAssign(e.target.value);
                                 }}
                             >
-                                Assign to me
-                            </button>
-                        )}
-                        <select
-                            value={ticket.assignedTo || ""}
-                            onClick={(e) => e.stopPropagation()} 
-                            onChange={(e) => {
-                                e.stopPropagation();
-                                handleAssign(e.target.value);
-                            }}
-                        >
-                            <option value="">Unassigned</option>
+                                <option value="">Unassigned</option>
 
-                            {["Agent A", "Agent B", "Agent C"].map((agent) => (
-                                <option key={agent} value={agent}>
-                                    {agent}
-                                </option>
-                            ))}
-                        </select>
+                                {["Agent A", "Agent B", "Agent C"].map((agent) => (
+                                    <option key={agent} value={agent}>
+                                        {agent}
+                                    </option>
+                                ))}
+                            </select>
+                        
 
                             {ticket.assignedTo && (
                                 <p>
                                     Assigned to: <strong>{ticket.assignedTo}</strong>
                                 </p>
                             )}
+                        </div>
 
-                        <span>
-                            {DateFormats.timeAgoFormat(ticket.createdAt)}
-                        </span>
         
                     </div>
 

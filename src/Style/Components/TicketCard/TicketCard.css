@@ -29,9 +29,22 @@
 .ticket-left {
     display: flex;
     flex-direction: column;
+}
+
+/* Group title + tags tightly */
+.ticket-main {
+    display: flex;
+    flex-direction: column;
     gap: 4px;
-    flex: 1;
-    min-width: 0;
+    margin-left: 10px;
+}
+
+/* Push time down */
+.ticket-time {
+    font-size: 12px;
+    color: #6f6f71;
+    margin-top: 30px; /* 👈 THIS creates the separation */
+    margin-left: 10px;
 }
 
 .ticket-left h4 {
@@ -64,6 +77,8 @@
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+
+    font-size: 18px; 
 }
 
 .ticket-meta {
@@ -71,7 +86,7 @@
     gap: 10px;
     font-size: 13px;
     color: #6b7280;
-    margin-top: 35px;
+    margin-top: 6px;
 }
 
 .ticket-meta span {
@@ -88,7 +103,7 @@
     gap: 15px;
     font-size: 12px;
     color: #444;
-    margin-left: auto;
+    margin-right: 10px;
 
     flex-shrink: 0;
 }
@@ -157,4 +172,49 @@
 
     font-size: 12px;
     color: #374151;
+}
+
+.assign-btn {
+    font-size: 12px;
+    padding: 6px 10px;
+    background: #ffffff;
+    color: black;
+    border-radius: 6px;
+    border: 1px solid black;
+    font-weight: 500;
+
+    transition: all 0.2s ease;
+}
+
+.assign-btn:hover {
+    background: #ea1d23;
+    color: white;
+    border: none;
+
+}
+
+.assign-controls {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+
+.assign-btn,
+.assign-dropdown {
+    height: 32px;
+    width: 110px; 
+    padding: 0 10px;
+    font-size: 12px;
+    border-radius: 6px;
+    box-sizing: border-box;
+}
+
+
+/* Dropdown */
+.assign-dropdown {
+    border: 1px solid black;
+    background: white;
+    cursor: pointer;
 }
