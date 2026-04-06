@@ -20,9 +20,29 @@ function TicketCreation({ addTicket }){
 
     const [success, setSuccess] = useState("");
 
+    const [error, setError] = useState("");
+
+    const isFormValid =
+        title.trim() !== "" &&
+        description.trim() !== "" &&
+        firstName.trim() !== "" &&
+        lastName.trim() !== "" &&
+        email.trim() !== "" &&
+        category.trim() !== "";
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
+
+        
+
+        if (!isFormValid) {
+            setError("Please fill in all required fields.");
+            setSuccess("");
+            return;
+        }
+
+    setError("");
         
 
         const messages = [
@@ -59,8 +79,14 @@ function TicketCreation({ addTicket }){
         addTicket(newTicket);
         setSuccess("Ticket created successfully!");
 
+        //reset fields:
         setTitle("");
         setDescription("");
+        setFirstName("");
+        setLastName("");
+        setEmail("");
+        setCategory("");
+        setAttachment(null);
 
 
     };
@@ -82,7 +108,7 @@ function TicketCreation({ addTicket }){
                             className="test-class"
                             label={{
                                 material: false,
-                                content: "Title of Ticket",
+                                content: "Title of Ticket *",
                                 className: "test-class-label",
                             }}
                             value={title}
@@ -98,7 +124,7 @@ function TicketCreation({ addTicket }){
                     
                     {/* CATEGORY OF TICKET*/}
                     <div className = "form-group">
-                        <label>Support Area</label>
+                        <label>Support Area *</label>
                         <select
                             value={category}
                             onChange={(e) => setCategory(e.target.value)}
@@ -117,7 +143,7 @@ function TicketCreation({ addTicket }){
                             className="test-class"
                             label={{
                                 material: false,
-                                content: "Description of Ticket",
+                                content: "Description of Ticket *",
                                 className: "test-class-label"
                             }}
                             value={description}
@@ -165,7 +191,7 @@ function TicketCreation({ addTicket }){
                     <TextField
                         label={{
                             material: false,
-                            content: "Email",
+                            content: "Email *",
                         }}
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
@@ -177,13 +203,21 @@ function TicketCreation({ addTicket }){
                             {success}
                         </p>
                     )}
+
+                    {error && (
+                        <p className="error-message">
+                            {error}
+                        </p>
+                    )}
                     <div className="button-row">
                         <LightButton
                             type="submit"
                             className="npl-submit-btn"
+                            disabled={!isFormValid}
                             style={{
-                                background: "#ea1d23",
+                                background: isFormValid ? "#ea1d23" : "#ccc",
                                 color: "#fff",
+                                
                 
                                 padding: "12px",
                                 width: "100px",

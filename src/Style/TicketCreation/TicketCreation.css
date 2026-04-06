@@ -66,3 +66,7 @@ input[type="file"] {
     font-size: 14px;
     color: black;
 }
+
+.npl-submit-btn:disabled {
+    cursor: not-allowed;
+}
