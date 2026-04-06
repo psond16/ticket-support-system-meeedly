@@ -308,3 +308,11 @@
     cursor: not-allowed;
     transform: none;
 }
+
+.message-image {
+    max-width: 220px;
+    max-height: 200px;
+    border-radius: 10px;
+    object-fit: cover;
+    display: block;
+}

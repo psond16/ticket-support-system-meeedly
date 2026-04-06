@@ -193,7 +193,13 @@ function TicketDetail({ tickets, setTickets}) {
                                     className={msg.sender === "user" ? "msg-left" : "msg-right"}
                                 >
                                     <div className="message-bubble">
+                                    {msg.image ? (
+                                        <img src={msg.image} alt="uploaded" className="message-image" />
+                                    ) : msg.text ? (
                                         <p className="message-text">{msg.text}</p>
+                                    ) : (
+                                        <p className="message-text">Attachment</p>
+                                    )}
 
                                         <span className="message-time">
                                             {new Date(msg.time).toLocaleTimeString([], {

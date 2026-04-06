@@ -58,7 +58,7 @@ function TicketCreation({ addTicket }){
                 text: "",
                 time: new Date().toISOString(),
                 sender: "user",
-                attachment: URL.createObjectURL(attachment)
+                image: URL.createObjectURL(attachment)
             });
         }
         //to create a new ticket object from user input
