@@ -1,14 +1,26 @@
-.dashboard-container {
-    padding: 0 40px;
-    width: 100%;
+.dashboard-page {
+    margin-top: 20px;
+    padding: 24px 40px;
     box-sizing: border-box;
-}
+    width: 90%;
+    justify-self: center;
 
+}
 
 .search-wrapper {
     width: 100%;
-    padding: 0 40px;
-    box-sizing: border-box;
+    margin-bottom: 15px;
+}
+
+.filters-row {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 20px;
+    width: 100%;
+}
+
+.dashboard-container {
+    width: 100%;
 }
 
 .__npl-hsbr-p-ps input {
@@ -31,13 +43,6 @@
 }
 
 
-.filters-row {
-    display: flex;
-    gap: 12px;
-    padding: 12px 40px;
-    box-sizing: border-box;
-    width: 100%;
-}
 
 .filters-row select {
     height: 36px;
@@ -56,4 +61,25 @@
     visibility: visible;
     opacity: 1 ;
     margin-right: 15px;
+}
+
+.load-more-button {
+    margin: 20px auto;
+    padding: 10px 18px;
+    border-radius: 10px;
+    display: block;
+    background: transparent;
+
+    color: #ea1d23;
+    border: 1px solid #ea1d23;
+    
+    font-weight: 600;
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.load-more-button:hover {
+    background: #ea1d23;
+    color: white;
 }
