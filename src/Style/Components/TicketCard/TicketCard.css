@@ -31,7 +31,7 @@
     flex-direction: column;
 }
 
-/* Group title + tags tightly */
+
 .ticket-main {
     display: flex;
     flex-direction: column;
@@ -39,11 +39,11 @@
     margin-left: 10px;
 }
 
-/* Push time down */
+
 .ticket-time {
     font-size: 12px;
     color: #6f6f71;
-    margin-top: 30px; /* 👈 THIS creates the separation */
+    margin-top: 30px; 
     margin-left: 10px;
 }
 
@@ -212,9 +212,32 @@
 }
 
 
-/* Dropdown */
+
 .assign-dropdown {
     border: 1px solid black;
     background: white;
     cursor: pointer;
+}
+
+.assign-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+
+.assign-btn,
+.assigned-text {
+    min-width: 120px;
+}
+
+
+.assign-dropdown {
+    width: 120px;
+}
+
+
+.assigned-text {
+    font-size: 12px;
+    color: #444;
 }

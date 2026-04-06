@@ -48,12 +48,17 @@ function TicketCard({ ticket, assignToMe }) {
                     </div>
 
                     {/* RIGHT */}
-                    <div className="ticket-right">
+                        <div className="ticket-right">
+
+                        {/* STATUS BADGE */}
                         <div className={`status-badge ${ticket.status.toLowerCase().replace(" ", "-")}`}>
                             {ticket.status}
                         </div>
+
+                        {/* ASSIGN CONTROLS */}
                         <div className="assign-controls">
-                            {!ticket.assignedTo && (
+
+                            {!ticket.assignedTo ? (
                                 <LightButton
                                     className="assign-btn"
                                     onClick={(e) => {
@@ -63,34 +68,31 @@ function TicketCard({ ticket, assignToMe }) {
                                 >
                                     Assign to me
                                 </LightButton>
+                            ) : (
+                                <p className="assigned-text">
+                                    Assigned to: <strong>{ticket.assignedTo}</strong>
+                                </p>
                             )}
+
                             <select
+                                className="assign-dropdown"
                                 value={ticket.assignedTo || ""}
-                                onClick={(e) => e.stopPropagation()} 
+                                onClick={(e) => e.stopPropagation()}
                                 onChange={(e) => {
                                     e.stopPropagation();
                                     handleAssign(e.target.value);
                                 }}
                             >
                                 <option value="">Unassigned</option>
-
-                                {["Agent A", "Agent B", "Agent C"].map((agent) => (
+                                {Agents.map((agent) => (
                                     <option key={agent} value={agent}>
                                         {agent}
                                     </option>
                                 ))}
                             </select>
-                        
 
-                            {ticket.assignedTo && (
-                                <p>
-                                    Assigned to: <strong>{ticket.assignedTo}</strong>
-                                </p>
-                            )}
                         </div>
-
-        
-                    </div>
+                        </div>
 
                 </div>
             </NoplinCardBodyArea>
