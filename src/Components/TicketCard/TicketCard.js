@@ -14,6 +14,13 @@ function TicketCard({ ticket, assignToMe }) {
         assignToMe(ticket.id, agentName);
     };
 
+    const truncateTitle = (text, maxLength = 50) => {
+        if (!text) return "";
+        return text.length > maxLength
+            ? text.slice(0, maxLength) + "..."
+            : text;
+    };
+
     return (
         <NoplinCardGeneral className="ticket-row" onClick={() => navigate(`/ticket/${ticket.id}`)}>
 
@@ -24,7 +31,7 @@ function TicketCard({ ticket, assignToMe }) {
                     <div className="ticket-left">
                         <div className="ticket-main">
                             <div className="ticket-title">
-                                <h4>{ticket.title}</h4>
+                                <h4>{truncateTitle(ticket.title)}</h4>
                             </div>
 
                             <div className="ticket-meta">
