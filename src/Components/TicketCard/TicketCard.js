@@ -48,51 +48,51 @@ function TicketCard({ ticket, assignToMe }) {
                     </div>
 
                     {/* RIGHT */}
-                        <div className="ticket-right">
+                    <div className="ticket-right">
 
-                        {/* STATUS BADGE */}
-                        <div className={`status-badge ${ticket.status.toLowerCase().replace(" ", "-")}`}>
-                            {ticket.status}
-                        </div>
+                    {/* STATUS BADGE */}
+                    <div className={`status-badge ${ticket.status.toLowerCase().replace(" ", "-")}`}>
+                        {ticket.status}
+                    </div>
 
-                        {/* ASSIGN CONTROLS */}
-                        <div className="assign-controls">
+                    {/* ASSIGN CONTROLS */}
+                    <div className="assign-controls">
 
-                            {!ticket.assignedTo ? (
-                                <LightButton
-                                    className="assign-btn"
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        assignToMe(ticket.id, "Agent A");
-                                    }}
-                                >
-                                    Assign to me
-                                </LightButton>
-                            ) : (
-                                <p className="assigned-text">
-                                    Assigned to: <strong>{ticket.assignedTo}</strong>
-                                </p>
-                            )}
-
-                            <select
-                                className="assign-dropdown"
-                                value={ticket.assignedTo || ""}
-                                onClick={(e) => e.stopPropagation()}
-                                onChange={(e) => {
+                        {!ticket.assignedTo ? (
+                            <LightButton
+                                className="assign-btn"
+                                onClick={(e) => {
                                     e.stopPropagation();
-                                    handleAssign(e.target.value);
+                                    assignToMe(ticket.id, "Agent A");
                                 }}
                             >
-                                <option value="">Unassigned</option>
-                                {Agents.map((agent) => (
-                                    <option key={agent} value={agent}>
-                                        {agent}
-                                    </option>
-                                ))}
-                            </select>
+                                Assign to me
+                            </LightButton>
+                        ) : (
+                            <p className="assigned-text">
+                                Assigned to: <strong>{ticket.assignedTo}</strong>
+                            </p>
+                        )}
 
-                        </div>
-                        </div>
+                        <select
+                            className="assign-dropdown"
+                            value={ticket.assignedTo || ""}
+                            onClick={(e) => e.stopPropagation()}
+                            onChange={(e) => {
+                                e.stopPropagation();
+                                handleAssign(e.target.value);
+                            }}
+                        >
+                            <option value="">Unassigned</option>
+                            {Agents.map((agent) => (
+                                <option key={agent} value={agent}>
+                                    {agent}
+                                </option>
+                            ))}
+                        </select>
+
+                    </div>
+                    </div>
 
                 </div>
             </NoplinCardBodyArea>
