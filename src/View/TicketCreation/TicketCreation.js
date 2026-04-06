@@ -69,10 +69,10 @@ function TicketCreation({ addTicket }){
         <div>
             <Navbar />
             <div className = "form-container">
-                <h3>Meeedly Support Form</h3>
-                <p>All fields marked with an asterisk (*) are required.</p>
+                <h3 className = "form-header">Meeedly - Support Form</h3>
+                <p className = "form-required-text">All fields marked with an asterisk (*) are required.</p>
 
-                <p>Please briefly complete the fields below, and consider adding a screenshot to help us further understand the issue, if applicable.  You will receive a response from program staff within 24 business hours (3 Days).</p>
+                <p className = "sub-heading">Please briefly complete the fields below, and consider adding a screenshot to help us further understand the issue, if applicable.  You will receive a response from program staff within 24 business hours (3 Days).</p>
 
                 <form onSubmit={handleSubmit}>
 
@@ -128,7 +128,7 @@ function TicketCreation({ addTicket }){
                     </div>
 
                     {/* PICTURE ABOUT THE TICKET*/}
-                    <div>
+                    <div className = "attachment-input">
                         <label>Attachment</label>
                         <input
                             type="file"
