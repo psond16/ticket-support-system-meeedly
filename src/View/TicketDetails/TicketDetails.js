@@ -3,6 +3,10 @@ import { useState } from "react";
 import CommonHomeUtils from "../../Scripts/CommonHomeUtils";
 import Navbar from "../../Components/Navigation/Navigation";
 
+import "../../Style/TicketDetail/TicketDetail.css";
+
+import {Avatar,} from "noplin-uis";
+
 function TicketDetail({ tickets, setTickets}) {
 
     const { id } = useParams();
@@ -10,11 +14,13 @@ function TicketDetail({ tickets, setTickets}) {
 
     const ticket = tickets.find((t) => t.id === Number(id)); // to connect to right ticket object
 
-    const isAssigned = !!ticket.assignedTo;
+    
 
     if (!ticket) {
         return <h2>Ticket not found</h2>;
     }
+
+    const isAssigned = !!ticket.assignedTo;
 
     const handleSend = () => {//handle reply by making a new copy instead of changing state
 
@@ -78,68 +84,94 @@ function TicketDetail({ tickets, setTickets}) {
     };
 
     return (
-        <div>
-            <Navbar />
-            <h1 className = "ticket-detail-title">{ticket.title}</h1>
+    <div>
+        <Navbar />
 
-            <p>Status: {ticket.status}</p>
-            <select
-                value={ticket.priority}
-                onChange={(e) => handlePriorityChange(e.target.value)}
-            >
-                <option value="Low">Low</option>
-                <option value="Medium">Medium</option>
-                <option value="High">High</option>
-            </select>
-            <p>Category: {ticket.category}</p>
+        <div className="ticket-detail-container">
+
+            {/* HEADER */}
+            <div className="ticket-detail-header">
+                <h1 className="ticket-detail-title">{ticket.title}</h1>
+
+                <div className="ticket-detail-meta">
+                    <span className="category-badge">{ticket.category}</span>
+
+                    <span className={`priority-badge ${ticket.priority?.toLowerCase()}`}>
+                        {ticket.priority}
+                    </span>
+
+                    <span className={`status-badge ${ticket.status.toLowerCase().replace(" ", "-")}`}>
+                        {ticket.status}
+                    </span>
+                </div>
+            </div>
+
+            {/* CONTROLS */}
+            <div className="ticket-detail-controls">
+                <select
+                    value={ticket.priority}
+                    onChange={(e) => handlePriorityChange(e.target.value)}
+                    className="priority-select"
+                >
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                </select>
+
+                {ticket.status !== "Closed" && (
+                    <button
+                        className="close-btn"
+                        onClick={handleCloseTicket}
+                        disabled={!isAssigned}
+                    >
+                        Close Ticket
+                    </button>
+                )}
+            </div>
 
             <hr />
 
-            <h3>Conversation</h3>
+            {/* CONVERSATION */}
+            <div className="conversation-header">
+                <Avatar
+                    className="avatar-fixed"
+                    size={40}
+                    name={ticket.firstName || "User"}
+                    statusColor="yellow"
+                    image=""
+                />
 
-            <div>
+                <span className="conversation-user">
+                    {ticket.userName || "User"}
+                </span>
+            </div>
+
+            <div className="conversation-box">
                 {ticket.messages.length === 0 ? (
-                    <p>No messages yet</p>
+                    <p className="empty-text">No messages yet</p>
                 ) : (
                     ticket.messages.map((msg, index) => (
                         <div
                             key={index}
-                            style={{
-                                textAlign: msg.sender === "user" ? "left" : "right",
-                                margin: "10px 0"
-                            }}
+                            className={msg.sender === "user" ? "msg-left" : "msg-right"}
                         >
-                            <div
-                                style={{
-                                    display: "inline-block",
-                                    padding: "8px 12px",
-                                    borderRadius: "10px",
-                                    backgroundColor: msg.sender === "user" ? "#e5e5e5" : "#cce5ff",
-                                    maxWidth: "250px"
-                                }}
-                            >
-                                {/* text */}
+                            <div className="message-bubble">
                                 {msg.text && (
-                                    <p style={{ margin: 0 }}>
+                                    <p className="message-text">
                                         <strong>{msg.sender}:</strong> {msg.text}
                                     </p>
                                 )}
-                    
-                                {/* image */}
+
                                 {msg.attachment && (
                                     <img
                                         src={msg.attachment}
                                         alt="attachment"
-                                        style={{
-                                            width: "100%",
-                                            marginTop: msg.text ? "8px" : "0",
-                                            borderRadius: "8px"
-                                        }}
+                                        className="message-image"
                                     />
                                 )}
                             </div>
-                    
-                            <small>
+
+                            <small className="message-time">
                                 {new Date(msg.time).toLocaleString()}
                             </small>
                         </div>
@@ -148,44 +180,39 @@ function TicketDetail({ tickets, setTickets}) {
             </div>
 
             <hr />
-            
 
             {!isAssigned && (
-                <p style={{ color: "orange" }}>
+                <p className="warning-text">
                     This ticket must be assigned before you can reply or close it.
                 </p>
             )}
 
-            <div>
+            {/* INPUT AREA */}
+            <div className="reply-box">
                 <input
                     type="text"
                     value={message}
                     disabled={ticket.status === "Closed" || !isAssigned}
-                    placeholder={
-                        !isAssigned
-                            ? "Ticket not Assigned"
-                            : "Type a response..."
-                    }
+                    placeholder={!isAssigned ? "Ticket not Assigned" : "Type a response..."}
                     onChange={(e) => setMessage(e.target.value)}
                     onKeyDown={(e) => {
-                        if (e.key === "Enter" && message.trim()) {
-                            handleSend();
-                        }
+                        if (e.key === "Enter" && message.trim()) handleSend();
                     }}
+                    className="reply-input"
                 />
 
-                <button onClick={handleSend} disabled={ticket.status === "Closed" || !isAssigned}>
+                <button
+                    className="send-btn"
+                    onClick={handleSend}
+                    disabled={ticket.status === "Closed" || !isAssigned}
+                >
                     Send
                 </button>
-
-                {ticket.status !== "Closed" && (
-                    <button onClick={handleCloseTicket} disabled = {!isAssigned}>
-                        Close Ticket
-                    </button>
-                )}
             </div>
+
         </div>
-    );
+    </div>
+);
 }
 
 export default TicketDetail;
