@@ -94,3 +94,10 @@
     align-items: center;
     justify-content: center;
 }
+
+.ticket-top-strip {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+}

@@ -93,41 +93,47 @@ function TicketDetail({ tickets, setTickets}) {
             <div className="ticket-detail-header">
                 <h1 className="ticket-detail-title">{ticket.title}</h1>
 
-                <div className="ticket-detail-meta">
-                    <span className="category-badge">{ticket.category}</span>
+                <div className="ticket-top-strip">
 
-                    <span className={`priority-badge ${ticket.priority?.toLowerCase()}`}>
-                        {ticket.priority}
-                    </span>
+                    {/* LEFT */}
+                    <div className="ticket-detail-meta">
+                        <span className="category-badge">{ticket.category}</span>
 
-                    <span className={`status-badge ${ticket.status.toLowerCase().replace(" ", "-")}`}>
-                        {ticket.status}
-                    </span>
+                        <span className={`priority-badge ${ticket.priority?.toLowerCase()}`}>
+                            {ticket.priority}
+                        </span>
+
+                        <span className={`status-badge ${ticket.status.toLowerCase().replace(" ", "-")}`}>
+                            {ticket.status}
+                        </span>
+                    </div>
+
+                    {/* RIGHT */}
+                    <div className="ticket-detail-controls">
+                        <select
+                            value={ticket.priority}
+                            onChange={(e) => handlePriorityChange(e.target.value)}
+                            className="priority-select"
+                        >
+                            <option value="Low">Low</option>
+                            <option value="Medium">Medium</option>
+                            <option value="High">High</option>
+                        </select>
+
+                        {ticket.status !== "Closed" && (
+                            <button
+                                className="close-btn"
+                                onClick={handleCloseTicket}
+                                disabled={!isAssigned}
+                            >
+                                Close Ticket
+                            </button>
+                        )}
+                    </div>
+
                 </div>
             </div>
-
-            {/* CONTROLS */}
-            <div className="ticket-detail-controls">
-                <select
-                    value={ticket.priority}
-                    onChange={(e) => handlePriorityChange(e.target.value)}
-                    className="priority-select"
-                >
-                    <option value="Low">Low</option>
-                    <option value="Medium">Medium</option>
-                    <option value="High">High</option>
-                </select>
-
-                {ticket.status !== "Closed" && (
-                    <button
-                        className="close-btn"
-                        onClick={handleCloseTicket}
-                        disabled={!isAssigned}
-                    >
-                        Close Ticket
-                    </button>
-                )}
-            </div>
+   
 
             <hr />
 
@@ -136,13 +142,13 @@ function TicketDetail({ tickets, setTickets}) {
                 <Avatar
                     className="avatar-fixed"
                     size={40}
-                    name={ticket.firstName || "User"}
+                    name={`${ticket.firstName} ${ticket.lastName}`}
                     statusColor="yellow"
                     image=""
                 />
 
                 <span className="conversation-user">
-                    {ticket.userName || "User"}
+                {`${ticket.firstName} ${ticket.lastName}`}
                 </span>
             </div>
 
