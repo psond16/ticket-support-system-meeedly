@@ -1,70 +1,151 @@
-# Getting Started with Create React App
+# 🚀 Support Ticket System — Meeedly Assignment
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A scalable support ticket system built using React to simulate a real-world SaaS support environment.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## ⚙️ Installation
 
-### `npm start`
+### 1. Clone Repository
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+```bash
+git clone https://github.com/psond16/ticket-support-system-meeedly
+```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
 
-### `npm test`
+### 2. Install Dependencies
+```bash
+npm install
+```
+### 3. Install UI Package
+```bash
+npm install noplin-uis
+```
+### 4. Run Application
+```bash
+npm start
+```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Open in browser:
 
-### `npm run build`
+http://localhost:3000
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 📦 Usage
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Create Ticket
+1. Enter title and description
+2. Submit form 
+3. Ticket appears on dashboard
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Manage Tickets
+1. Search and filter tickets
+2. Assign tickets
+3. Track status and priority
 
-### `npm run eject`
+### Respond to Tickets
+1. Open ticket
+2. Use chat interface
+3. Send messages
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Close Ticket
+1. Must be assigned
+2. Requires confirmation
+3. Disables further actions
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🧱 Architecture
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Ticket Model
+```bash
+{
+  id,
+  title,
+  description,
+  status,
+  priority,
+  assignedTo,
+  createdAt,
+  messages: []
+}
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Message Model
+```bash
+{
+  sender,
+  text,
+  image,
+  time
+}
+```
 
-## Learn More
+### Component Structure
+```bash
+TicketCard
+Navbar
+Footer
+Dashboard
+TicketDetail
+Filters
+Search
+```
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## ⚠️ Challenges & Fixes
+### Event Bubbling Issue
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```bash
+e.stopPropagation();
+```
 
-### Code Splitting
+Fixes unintended navigation when clicking inner buttons.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### State Persistence
+1. Local storage used to persist tickets
+2. Prevents data loss on refresh
+3. 
+### UI Constraints
+1. Fixed layout issues caused by UI library wrappers
 
-### Analyzing the Bundle Size
+### 🛡 Edge Case Handling
+```bash
+if (!message.trim()) return;
+```
+1. Prevent empty submissions
+2. Handle long titles
+3. Show empty states
+4. Disable actions for closed tickets
+5. Confirm before closing tickets
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### 🔁 Ticket Flow
+1. User creates ticket
+2. Ticket appears on dashboard
+3. Agent assigns ticket
+4. Agent replies in chat
+5. Ticket is resolved
+6. Ticket is closed
+   
+## 🎥 Demo
 
-### Making a Progressive Web App
+https://youtu.be/zVthK4UKfRg
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## 📝 Article
 
-### Advanced Configuration
+https://medium.com/@parineetsond16/beyond-crud-engineering-a-scalable-support-ticket-system-for-real-world-workflows-93761a68e548
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## 👤 Author
 
-### Deployment
+Parineet Sond
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+University of Illinois Chicago
 
-### `npm run build` fails to minify
+## 🙌 Acknowledgment
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Thanks to Meeedly for this assignment.
+
+Focus: scalable system design, real-world workflows, and maintainable architecture.
+
+## 🧪 Scripts
+```bash
+npm start
+npm run build
+npm test
+```
