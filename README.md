@@ -30,6 +30,12 @@ Open in browser:
 
 http://localhost:3000
 
+## 📚 Documentation
+
+Noplin UI was used as the component library for this project.
+
+https://noplin.meeedly.com/
+
 ## 📦 Usage
 
 ### Create Ticket
